@@ -1,0 +1,21 @@
+#!/bin/bash
+#SBATCH --job-name=soccertwos_curriculum
+#SBATCH -N1 --ntasks-per-node=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH -t12:00:00
+#SBATCH --output=logs/curriculum-%j.out
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --mail-user=jpise3@gatech.edu
+
+source ~/scratch/miniconda3/etc/profile.d/conda.sh
+conda activate ~/scratch/conda/envs/soccertwos
+
+cd ~/scratch/soccer-twos-starter
+mkdir -p logs ray_results
+
+export RAY_USAGE_STATS_ENABLED=0
+export RAY_DISABLE_DASHBOARD=1
+export OMP_NUM_THREADS=1
+
+python train_ray_curriculum_multiagent.py

@@ -7,14 +7,18 @@
 **Authors:** Naman Tellakula — ntellakula3@gatech.edu
 
 ## Description
-PPO self-play trained with a `ShapedRewardWrapper` (see `utils.py`) that adds:
-- `+0.01 × (ball_x - prev_ball_x)` — reward ball progress toward opponent goal (x=+14)
-- `-0.001` — per-step penalty to discourage stalling
-- Original sparse goal reward is preserved.
+PPO self-play trained with a `ShapedRewardWrapper` (see `utils.py`) that preserves
+the original sparse goal reward and adds small dense shaping terms:
+- Ball progress toward the opponent goal.
+- A per-step penalty to discourage stalling.
+- Ball-pressure reward for staying close enough to influence the ball.
+- Team-spacing reward to encourage passing lanes and reduce clumping.
+- Goalie positioning and blocking rewards for staying between the ball and own goal.
+- Striker support-positioning reward for staying behind the ball in an attacking lane.
 
 Hypothesis: the sparse goal reward alone makes credit assignment nearly impossible
-in 2v2 soccer; dense progress shaping should accelerate early learning and yield
-higher terminal win rate vs. the unshaped baseline (Agent1).
+in 2v2 soccer; dense tactical shaping should accelerate early learning by rewarding
+intermediate soccer behaviors that correlate with scoring and defending.
 
 ## Training
 - Algorithm: PPO (Ray RLlib 1.4.0)
