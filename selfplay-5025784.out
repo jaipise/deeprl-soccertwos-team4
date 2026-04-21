@@ -1,0 +1,1104 @@
+---------------------------------------
+Begin Slurm Prolog: Apr-20-2026 22:18:35
+Job ID:    5025784
+User ID:   jpise3
+Account:   coc
+Job name:  soccertwos_selfplay
+Partition: coc-gpu
+QOS:       coc-ice
+---------------------------------------
+/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/autoscaler/_private/cli_logger.py:57: FutureWarning: Not all Ray CLI dependencies were found. In Ray 1.4+, the Ray CLI, autoscaler, and dashboard will only be usable via `pip install 'ray[default]'`. Please update your install command.
+  warnings.warn(
+2026-04-20 22:20:03,860	INFO services.py:1272 -- View the Ray dashboard at [1m[32mhttp://127.0.0.1:8265[39m[22m
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1776738009.312796 2984163 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[33m(raylet)[0m /home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/autoscaler/_private/cli_logger.py:57: FutureWarning: Not all Ray CLI dependencies were found. In Ray 1.4+, the Ray CLI, autoscaler, and dashboard will only be usable via `pip install 'ray[default]'`. Please update your install command.
+[2m[33m(raylet)[0m   warnings.warn(
+2026-04-20 22:20:11,569	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-35-0.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+[2m[33m(raylet)[0m Traceback (most recent call last):
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 338, in <module>
+[2m[33m(raylet)[0m     raise e
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+[2m[33m(raylet)[0m     loop.run_until_complete(agent.run())
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+[2m[33m(raylet)[0m     return future.result()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+[2m[33m(raylet)[0m     modules = self._load_modules()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+[2m[33m(raylet)[0m     c = cls(self)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+[2m[33m(raylet)[0m     self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+[2m[33m(raylet)[0m     prometheus_exporter.new_stats_exporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+[2m[33m(raylet)[0m     exporter = PrometheusStatsExporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+[2m[33m(raylet)[0m     self.serve_http()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+[2m[33m(raylet)[0m     start_http_server(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+[2m[33m(raylet)[0m     TmpServer.address_family, addr = _get_best_family(addr, port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+[2m[33m(raylet)[0m     infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+[2m[33m(raylet)[0m     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+[2m[33m(raylet)[0m socket.gaierror: [Errno -2] Name or service not known
+[2m[33m(raylet)[0m /home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/autoscaler/_private/cli_logger.py:57: FutureWarning: Not all Ray CLI dependencies were found. In Ray 1.4+, the Ray CLI, autoscaler, and dashboard will only be usable via `pip install 'ray[default]'`. Please update your install command.
+[2m[33m(raylet)[0m   warnings.warn(
+2026-04-20 22:20:13,972	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-35-0.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+[INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[33m(raylet)[0m Traceback (most recent call last):
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 338, in <module>
+[2m[33m(raylet)[0m     raise e
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+[2m[33m(raylet)[0m     loop.run_until_complete(agent.run())
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+[2m[33m(raylet)[0m     return future.result()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+[2m[33m(raylet)[0m     modules = self._load_modules()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+[2m[33m(raylet)[0m     c = cls(self)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+[2m[33m(raylet)[0m     self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+[2m[33m(raylet)[0m     prometheus_exporter.new_stats_exporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+[2m[33m(raylet)[0m     exporter = PrometheusStatsExporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+[2m[33m(raylet)[0m     self.serve_http()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+[2m[33m(raylet)[0m     start_http_server(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+[2m[33m(raylet)[0m     TmpServer.address_family, addr = _get_best_family(addr, port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+[2m[33m(raylet)[0m     infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+[2m[33m(raylet)[0m     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+[2m[33m(raylet)[0m socket.gaierror: [Errno -2] Name or service not known
+INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[INFO] Connected new brain: SoccerTwos?team=1
+INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[INFO] Connected new brain: SoccerTwos?team=0
+INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[33m(raylet)[0m /home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/autoscaler/_private/cli_logger.py:57: FutureWarning: Not all Ray CLI dependencies were found. In Ray 1.4+, the Ray CLI, autoscaler, and dashboard will only be usable via `pip install 'ray[default]'`. Please update your install command.
+[2m[33m(raylet)[0m   warnings.warn(
+2026-04-20 22:20:16,143	WARNING sample.py:401 -- DeprecationWarning: wrapping <function policy_mapping_fn at 0x1555551744c0> with tune.function() is no longer needed
+2026-04-20 22:20:16,384	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-35-0.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+[2m[33m(raylet)[0m Traceback (most recent call last):
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 338, in <module>
+[2m[33m(raylet)[0m     raise e
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+[2m[33m(raylet)[0m     loop.run_until_complete(agent.run())
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+[2m[33m(raylet)[0m     return future.result()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+[2m[33m(raylet)[0m     modules = self._load_modules()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+[2m[33m(raylet)[0m     c = cls(self)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+[2m[33m(raylet)[0m     self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+[2m[33m(raylet)[0m     prometheus_exporter.new_stats_exporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+[2m[33m(raylet)[0m     exporter = PrometheusStatsExporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+[2m[33m(raylet)[0m     self.serve_http()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+[2m[33m(raylet)[0m     start_http_server(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+[2m[33m(raylet)[0m     TmpServer.address_family, addr = _get_best_family(addr, port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+[2m[33m(raylet)[0m     infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+[2m[33m(raylet)[0m     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+[2m[33m(raylet)[0m socket.gaierror: [Errno -2] Name or service not known
+[2m[33m(raylet)[0m /home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/autoscaler/_private/cli_logger.py:57: FutureWarning: Not all Ray CLI dependencies were found. In Ray 1.4+, the Ray CLI, autoscaler, and dashboard will only be usable via `pip install 'ray[default]'`. Please update your install command.
+[2m[33m(raylet)[0m   warnings.warn(
+[2m[36m(pid=2984557)[0m 2026-04-20 22:20:18,629	WARNING ppo.py:135 -- `train_batch_size` (4000) cannot be achieved with your other settings (num_workers=8 num_envs_per_worker=3 rollout_fragment_length=5000)! Auto-adjusting `rollout_fragment_length` to 166.
+2026-04-20 22:20:18,815	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-35-0.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+[2m[33m(raylet)[0m Traceback (most recent call last):
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 338, in <module>
+[2m[33m(raylet)[0m     raise e
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+[2m[33m(raylet)[0m     loop.run_until_complete(agent.run())
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+[2m[33m(raylet)[0m     return future.result()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+[2m[33m(raylet)[0m     modules = self._load_modules()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+[2m[33m(raylet)[0m     c = cls(self)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+[2m[33m(raylet)[0m     self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+[2m[33m(raylet)[0m     prometheus_exporter.new_stats_exporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+[2m[33m(raylet)[0m     exporter = PrometheusStatsExporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+[2m[33m(raylet)[0m     self.serve_http()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+[2m[33m(raylet)[0m     start_http_server(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+[2m[33m(raylet)[0m     TmpServer.address_family, addr = _get_best_family(addr, port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+[2m[33m(raylet)[0m     infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+[2m[33m(raylet)[0m     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+[2m[33m(raylet)[0m socket.gaierror: [Errno -2] Name or service not known
+[2m[36m(pid=2984548)[0m WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+[2m[36m(pid=2984548)[0m I0000 00:00:1776738020.495789 2984548 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984543)[0m WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+[2m[36m(pid=2984543)[0m I0000 00:00:1776738020.495341 2984543 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984550)[0m WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+[2m[36m(pid=2984550)[0m I0000 00:00:1776738020.496111 2984550 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984535)[0m WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+[2m[36m(pid=2984535)[0m I0000 00:00:1776738020.500740 2984535 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[33m(raylet)[0m /home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/autoscaler/_private/cli_logger.py:57: FutureWarning: Not all Ray CLI dependencies were found. In Ray 1.4+, the Ray CLI, autoscaler, and dashboard will only be usable via `pip install 'ray[default]'`. Please update your install command.
+[2m[33m(raylet)[0m   warnings.warn(
+[2m[36m(pid=2984534)[0m WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+[2m[36m(pid=2984534)[0m I0000 00:00:1776738020.508025 2984534 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984558)[0m WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+[2m[36m(pid=2984558)[0m I0000 00:00:1776738020.509468 2984558 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984547)[0m WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+[2m[36m(pid=2984547)[0m I0000 00:00:1776738020.535252 2984547 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984556)[0m WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+[2m[36m(pid=2984556)[0m I0000 00:00:1776738020.559803 2984556 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984548)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984543)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984548)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984548)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984543)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984543)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984548)[0m 2026-04-20 22:20:21,039	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984543)[0m 2026-04-20 22:20:21,039	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984550)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984535)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984534)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984558)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984547)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984556)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+2026-04-20 22:20:21,335	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-35-0.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+[2m[36m(pid=2984550)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984550)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984550)[0m 2026-04-20 22:20:21,328	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984535)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984535)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984535)[0m 2026-04-20 22:20:21,323	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984534)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984534)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984534)[0m 2026-04-20 22:20:21,329	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984558)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984558)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984547)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984547)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984547)[0m 2026-04-20 22:20:21,328	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984556)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984556)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984556)[0m 2026-04-20 22:20:21,329	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984558)[0m 2026-04-20 22:20:21,330	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[33m(raylet)[0m Traceback (most recent call last):
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 338, in <module>
+[2m[33m(raylet)[0m     raise e
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+[2m[33m(raylet)[0m     loop.run_until_complete(agent.run())
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+[2m[33m(raylet)[0m     return future.result()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+[2m[33m(raylet)[0m     modules = self._load_modules()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+[2m[33m(raylet)[0m     c = cls(self)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+[2m[33m(raylet)[0m     self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+[2m[33m(raylet)[0m     prometheus_exporter.new_stats_exporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+[2m[33m(raylet)[0m     exporter = PrometheusStatsExporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+[2m[33m(raylet)[0m     self.serve_http()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+[2m[33m(raylet)[0m     start_http_server(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+[2m[33m(raylet)[0m     TmpServer.address_family, addr = _get_best_family(addr, port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+[2m[33m(raylet)[0m     infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+[2m[33m(raylet)[0m     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+[2m[33m(raylet)[0m socket.gaierror: [Errno -2] Name or service not known
+[2m[36m(pid=2984548)[0m 2026-04-20 22:20:22,191	INFO torch_policy.py:134 -- TorchPolicy (worker=3) running on CPU.
+[2m[36m(pid=2984543)[0m 2026-04-20 22:20:22,214	INFO torch_policy.py:134 -- TorchPolicy (worker=4) running on CPU.
+[2m[36m(pid=2984550)[0m 2026-04-20 22:20:22,215	INFO torch_policy.py:134 -- TorchPolicy (worker=2) running on CPU.
+[2m[36m(pid=2984534)[0m 2026-04-20 22:20:22,208	INFO torch_policy.py:134 -- TorchPolicy (worker=7) running on CPU.
+[2m[36m(pid=2984558)[0m 2026-04-20 22:20:22,208	INFO torch_policy.py:134 -- TorchPolicy (worker=5) running on CPU.
+[2m[36m(pid=2984547)[0m 2026-04-20 22:20:22,216	INFO torch_policy.py:134 -- TorchPolicy (worker=6) running on CPU.
+[2m[36m(pid=2984535)[0m 2026-04-20 22:20:22,220	INFO torch_policy.py:134 -- TorchPolicy (worker=1) running on CPU.
+[2m[36m(pid=2984556)[0m 2026-04-20 22:20:22,222	INFO torch_policy.py:134 -- TorchPolicy (worker=8) running on CPU.
+[2m[33m(raylet)[0m /home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/autoscaler/_private/cli_logger.py:57: FutureWarning: Not all Ray CLI dependencies were found. In Ray 1.4+, the Ray CLI, autoscaler, and dashboard will only be usable via `pip install 'ray[default]'`. Please update your install command.
+[2m[33m(raylet)[0m   warnings.warn(
+[2m[36m(pid=2984548)[0m 2026-04-20 22:20:23,681	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984548)[0m 2026-04-20 22:20:23,684	INFO torch_policy.py:134 -- TorchPolicy (worker=3) running on CPU.
+[2m[36m(pid=2984548)[0m 2026-04-20 22:20:23,723	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984548)[0m 2026-04-20 22:20:23,726	INFO torch_policy.py:134 -- TorchPolicy (worker=3) running on CPU.
+[2m[36m(pid=2984543)[0m 2026-04-20 22:20:23,688	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984543)[0m 2026-04-20 22:20:23,695	INFO torch_policy.py:134 -- TorchPolicy (worker=4) running on CPU.
+[2m[36m(pid=2984550)[0m 2026-04-20 22:20:23,679	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984550)[0m 2026-04-20 22:20:23,682	INFO torch_policy.py:134 -- TorchPolicy (worker=2) running on CPU.
+[2m[36m(pid=2984550)[0m 2026-04-20 22:20:23,719	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984550)[0m 2026-04-20 22:20:23,722	INFO torch_policy.py:134 -- TorchPolicy (worker=2) running on CPU.
+[2m[36m(pid=2984535)[0m 2026-04-20 22:20:23,680	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984535)[0m 2026-04-20 22:20:23,684	INFO torch_policy.py:134 -- TorchPolicy (worker=1) running on CPU.
+[2m[36m(pid=2984535)[0m 2026-04-20 22:20:23,722	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984535)[0m 2026-04-20 22:20:23,725	INFO torch_policy.py:134 -- TorchPolicy (worker=1) running on CPU.
+[2m[36m(pid=2984534)[0m 2026-04-20 22:20:23,688	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984534)[0m 2026-04-20 22:20:23,695	INFO torch_policy.py:134 -- TorchPolicy (worker=7) running on CPU.
+[2m[36m(pid=2984558)[0m 2026-04-20 22:20:23,689	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984558)[0m 2026-04-20 22:20:23,696	INFO torch_policy.py:134 -- TorchPolicy (worker=5) running on CPU.
+[2m[36m(pid=2984547)[0m 2026-04-20 22:20:23,689	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984547)[0m 2026-04-20 22:20:23,696	INFO torch_policy.py:134 -- TorchPolicy (worker=6) running on CPU.
+[2m[36m(pid=2984556)[0m 2026-04-20 22:20:23,680	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984556)[0m 2026-04-20 22:20:23,684	INFO torch_policy.py:134 -- TorchPolicy (worker=8) running on CPU.
+[2m[36m(pid=2984556)[0m 2026-04-20 22:20:23,722	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984556)[0m 2026-04-20 22:20:23,725	INFO torch_policy.py:134 -- TorchPolicy (worker=8) running on CPU.
+2026-04-20 22:20:23,755	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-35-0.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+[2m[33m(raylet)[0m Traceback (most recent call last):
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 338, in <module>
+[2m[33m(raylet)[0m     raise e
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+[2m[33m(raylet)[0m     loop.run_until_complete(agent.run())
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+[2m[33m(raylet)[0m     return future.result()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+[2m[33m(raylet)[0m     modules = self._load_modules()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+[2m[33m(raylet)[0m     c = cls(self)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+[2m[33m(raylet)[0m     self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+[2m[33m(raylet)[0m     prometheus_exporter.new_stats_exporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+[2m[33m(raylet)[0m     exporter = PrometheusStatsExporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+[2m[33m(raylet)[0m     self.serve_http()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+[2m[33m(raylet)[0m     start_http_server(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+[2m[33m(raylet)[0m     TmpServer.address_family, addr = _get_best_family(addr, port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+[2m[33m(raylet)[0m     infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+[2m[33m(raylet)[0m     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+[2m[33m(raylet)[0m socket.gaierror: [Errno -2] Name or service not known
+[2m[36m(pid=2984548)[0m 2026-04-20 22:20:23,760	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984548)[0m 2026-04-20 22:20:23,763	INFO torch_policy.py:134 -- TorchPolicy (worker=3) running on CPU.
+[2m[36m(pid=2984543)[0m 2026-04-20 22:20:23,758	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984543)[0m 2026-04-20 22:20:23,761	INFO torch_policy.py:134 -- TorchPolicy (worker=4) running on CPU.
+[2m[36m(pid=2984550)[0m 2026-04-20 22:20:23,757	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984550)[0m 2026-04-20 22:20:23,760	INFO torch_policy.py:134 -- TorchPolicy (worker=2) running on CPU.
+[2m[36m(pid=2984535)[0m 2026-04-20 22:20:23,759	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984535)[0m 2026-04-20 22:20:23,762	INFO torch_policy.py:134 -- TorchPolicy (worker=1) running on CPU.
+[2m[36m(pid=2984534)[0m 2026-04-20 22:20:23,758	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984534)[0m 2026-04-20 22:20:23,760	INFO torch_policy.py:134 -- TorchPolicy (worker=7) running on CPU.
+[2m[36m(pid=2984558)[0m 2026-04-20 22:20:23,758	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984558)[0m 2026-04-20 22:20:23,760	INFO torch_policy.py:134 -- TorchPolicy (worker=5) running on CPU.
+[2m[36m(pid=2984547)[0m 2026-04-20 22:20:23,758	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984547)[0m 2026-04-20 22:20:23,761	INFO torch_policy.py:134 -- TorchPolicy (worker=6) running on CPU.
+[2m[36m(pid=2984556)[0m 2026-04-20 22:20:23,760	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984556)[0m 2026-04-20 22:20:23,762	INFO torch_policy.py:134 -- TorchPolicy (worker=8) running on CPU.
+[2m[36m(pid=2984548)[0m I0000 00:00:1776738023.794471 2984548 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984543)[0m 2026-04-20 22:20:23,796	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984543)[0m 2026-04-20 22:20:23,798	INFO torch_policy.py:134 -- TorchPolicy (worker=4) running on CPU.
+[2m[36m(pid=2984543)[0m I0000 00:00:1776738023.830451 2984543 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984535)[0m I0000 00:00:1776738023.793693 2984535 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984534)[0m 2026-04-20 22:20:23,795	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984534)[0m 2026-04-20 22:20:23,798	INFO torch_policy.py:134 -- TorchPolicy (worker=7) running on CPU.
+[2m[36m(pid=2984534)[0m I0000 00:00:1776738023.829551 2984534 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984558)[0m 2026-04-20 22:20:23,795	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984558)[0m 2026-04-20 22:20:23,798	INFO torch_policy.py:134 -- TorchPolicy (worker=5) running on CPU.
+[2m[36m(pid=2984547)[0m 2026-04-20 22:20:23,796	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984547)[0m 2026-04-20 22:20:23,799	INFO torch_policy.py:134 -- TorchPolicy (worker=6) running on CPU.
+[2m[36m(pid=2984547)[0m I0000 00:00:1776738023.832567 2984547 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984556)[0m I0000 00:00:1776738023.793592 2984556 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984556)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984556)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984556)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984556)[0m I0000 00:00:1776738024.330707 2984556 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984548)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984543)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984535)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984534)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984547)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984548)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984548)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984548)[0m I0000 00:00:1776738024.441342 2984548 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984543)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984543)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984543)[0m I0000 00:00:1776738024.435442 2984543 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984535)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984535)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984535)[0m I0000 00:00:1776738024.435693 2984535 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984534)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984534)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984534)[0m I0000 00:00:1776738024.440491 2984534 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984547)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984547)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984547)[0m I0000 00:00:1776738024.440609 2984547 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984556)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984556)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984556)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984548)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984543)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984535)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984534)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984547)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984548)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984548)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984543)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984543)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984535)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984535)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984534)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984534)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984547)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984547)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984557)[0m 2026-04-20 22:20:25,088	INFO ppo_tf_policy.py:327 -- `vf_share_layers=True` in your model. Therefore, remember to tune the value of `vf_loss_coeff`!
+[2m[36m(pid=2984557)[0m 2026-04-20 22:20:25,201	INFO torch_policy.py:148 -- TorchPolicy (worker=local) running on 1 GPU(s).
+[2m[36m(pid=2984557)[0m /home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/cuda/__init__.py:104: UserWarning: 
+[2m[36m(pid=2984557)[0m NVIDIA A100-PCIE-40GB with CUDA capability sm_80 is not compatible with the current PyTorch installation.
+[2m[36m(pid=2984557)[0m The current PyTorch install supports CUDA capabilities sm_37 sm_50 sm_60 sm_70.
+[2m[36m(pid=2984557)[0m If you want to use the NVIDIA A100-PCIE-40GB GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+[2m[36m(pid=2984557)[0m 
+[2m[36m(pid=2984557)[0m   warnings.warn(incompatible_device_warn.format(device_name, capability, " ".join(arch_list), device_name))
+[2m[33m(raylet)[0m /home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/autoscaler/_private/cli_logger.py:57: FutureWarning: Not all Ray CLI dependencies were found. In Ray 1.4+, the Ray CLI, autoscaler, and dashboard will only be usable via `pip install 'ray[default]'`. Please update your install command.
+[2m[33m(raylet)[0m   warnings.warn(
+[2m[36m(pid=2984550)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984558)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984550)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984550)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984550)[0m I0000 00:00:1776738025.488631 2984550 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984558)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984558)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984558)[0m I0000 00:00:1776738025.524325 2984558 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+[2m[36m(pid=2984550)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984550)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984550)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984558)[0m INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984558)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984558)[0m INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+2026-04-20 22:20:26,235	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-35-0.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+[2m[33m(raylet)[0m Traceback (most recent call last):
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 338, in <module>
+[2m[33m(raylet)[0m     raise e
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+[2m[33m(raylet)[0m     loop.run_until_complete(agent.run())
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+[2m[33m(raylet)[0m     return future.result()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+[2m[33m(raylet)[0m     modules = self._load_modules()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+[2m[33m(raylet)[0m     c = cls(self)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+[2m[33m(raylet)[0m     self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+[2m[33m(raylet)[0m     prometheus_exporter.new_stats_exporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+[2m[33m(raylet)[0m     exporter = PrometheusStatsExporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+[2m[33m(raylet)[0m     self.serve_http()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+[2m[33m(raylet)[0m     start_http_server(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+[2m[33m(raylet)[0m     TmpServer.address_family, addr = _get_best_family(addr, port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+[2m[33m(raylet)[0m     infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+[2m[33m(raylet)[0m     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+[2m[33m(raylet)[0m socket.gaierror: [Errno -2] Name or service not known
+[2m[33m(raylet)[0m /home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/autoscaler/_private/cli_logger.py:57: FutureWarning: Not all Ray CLI dependencies were found. In Ray 1.4+, the Ray CLI, autoscaler, and dashboard will only be usable via `pip install 'ray[default]'`. Please update your install command.
+[2m[33m(raylet)[0m   warnings.warn(
+2026-04-20 22:20:28,633	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-35-0.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+[2m[33m(raylet)[0m Traceback (most recent call last):
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 338, in <module>
+[2m[33m(raylet)[0m     raise e
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+[2m[33m(raylet)[0m     loop.run_until_complete(agent.run())
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+[2m[33m(raylet)[0m     return future.result()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+[2m[33m(raylet)[0m     modules = self._load_modules()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+[2m[33m(raylet)[0m     c = cls(self)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+[2m[33m(raylet)[0m     self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+[2m[33m(raylet)[0m     prometheus_exporter.new_stats_exporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+[2m[33m(raylet)[0m     exporter = PrometheusStatsExporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+[2m[33m(raylet)[0m     self.serve_http()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+[2m[33m(raylet)[0m     start_http_server(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+[2m[33m(raylet)[0m     TmpServer.address_family, addr = _get_best_family(addr, port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+[2m[33m(raylet)[0m     infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+[2m[33m(raylet)[0m     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+[2m[33m(raylet)[0m socket.gaierror: [Errno -2] Name or service not known
+[2m[33m(raylet)[0m /home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/autoscaler/_private/cli_logger.py:57: FutureWarning: Not all Ray CLI dependencies were found. In Ray 1.4+, the Ray CLI, autoscaler, and dashboard will only be usable via `pip install 'ray[default]'`. Please update your install command.
+[2m[33m(raylet)[0m   warnings.warn(
+2026-04-20 22:20:31,032	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-35-0.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+[2m[33m(raylet)[0m Traceback (most recent call last):
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 338, in <module>
+[2m[33m(raylet)[0m     raise e
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+[2m[33m(raylet)[0m     loop.run_until_complete(agent.run())
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+[2m[33m(raylet)[0m     return future.result()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+[2m[33m(raylet)[0m     modules = self._load_modules()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+[2m[33m(raylet)[0m     c = cls(self)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+[2m[33m(raylet)[0m     self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+[2m[33m(raylet)[0m     prometheus_exporter.new_stats_exporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+[2m[33m(raylet)[0m     exporter = PrometheusStatsExporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+[2m[33m(raylet)[0m     self.serve_http()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+[2m[33m(raylet)[0m     start_http_server(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+[2m[33m(raylet)[0m     TmpServer.address_family, addr = _get_best_family(addr, port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+[2m[33m(raylet)[0m     infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+[2m[33m(raylet)[0m     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+[2m[33m(raylet)[0m socket.gaierror: [Errno -2] Name or service not known
+[2m[33m(raylet)[0m /home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/autoscaler/_private/cli_logger.py:57: FutureWarning: Not all Ray CLI dependencies were found. In Ray 1.4+, the Ray CLI, autoscaler, and dashboard will only be usable via `pip install 'ray[default]'`. Please update your install command.
+[2m[33m(raylet)[0m   warnings.warn(
+2026-04-20 22:20:33,442	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-35-0.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+[2m[33m(raylet)[0m Traceback (most recent call last):
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 338, in <module>
+[2m[33m(raylet)[0m     raise e
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+[2m[33m(raylet)[0m     loop.run_until_complete(agent.run())
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+[2m[33m(raylet)[0m     return future.result()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+[2m[33m(raylet)[0m     modules = self._load_modules()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+[2m[33m(raylet)[0m     c = cls(self)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+[2m[33m(raylet)[0m     self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+[2m[33m(raylet)[0m     prometheus_exporter.new_stats_exporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+[2m[33m(raylet)[0m     exporter = PrometheusStatsExporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+[2m[33m(raylet)[0m     self.serve_http()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+[2m[33m(raylet)[0m     start_http_server(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+[2m[33m(raylet)[0m     TmpServer.address_family, addr = _get_best_family(addr, port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+[2m[33m(raylet)[0m     infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+[2m[33m(raylet)[0m     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+[2m[33m(raylet)[0m socket.gaierror: [Errno -2] Name or service not known
+[2m[33m(raylet)[0m /home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/autoscaler/_private/cli_logger.py:57: FutureWarning: Not all Ray CLI dependencies were found. In Ray 1.4+, the Ray CLI, autoscaler, and dashboard will only be usable via `pip install 'ray[default]'`. Please update your install command.
+[2m[33m(raylet)[0m   warnings.warn(
+2026-04-20 22:20:35,840	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-35-0.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+[2m[33m(raylet)[0m Traceback (most recent call last):
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 338, in <module>
+[2m[33m(raylet)[0m     raise e
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+[2m[33m(raylet)[0m     loop.run_until_complete(agent.run())
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+[2m[33m(raylet)[0m     return future.result()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+[2m[33m(raylet)[0m     modules = self._load_modules()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+[2m[33m(raylet)[0m     c = cls(self)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+[2m[33m(raylet)[0m     self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+[2m[33m(raylet)[0m     prometheus_exporter.new_stats_exporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+[2m[33m(raylet)[0m     exporter = PrometheusStatsExporter(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+[2m[33m(raylet)[0m     self.serve_http()
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+[2m[33m(raylet)[0m     start_http_server(
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+[2m[33m(raylet)[0m     TmpServer.address_family, addr = _get_best_family(addr, port)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+[2m[33m(raylet)[0m     infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+[2m[33m(raylet)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+[2m[33m(raylet)[0m     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+[2m[33m(raylet)[0m socket.gaierror: [Errno -2] Name or service not known
+[2m[36m(pid=2984557)[0m 2026-04-20 22:20:37,088	ERROR worker.py:409 -- Exception raised in creation task: The actor died because of an error raised in its creation task, [36mray::PPO.__init__()[39m (pid=2984557, ip=172.27.149.243)
+[2m[36m(pid=2984557)[0m   File "python/ray/_raylet.pyx", line 501, in ray._raylet.execute_task
+[2m[36m(pid=2984557)[0m   File "python/ray/_raylet.pyx", line 451, in ray._raylet.execute_task.function_executor
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/function_manager.py", line 563, in actor_method_executor
+[2m[36m(pid=2984557)[0m     return method(__ray_actor, *args, **kwargs)
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/agents/trainer_template.py", line 123, in __init__
+[2m[36m(pid=2984557)[0m     Trainer.__init__(self, config, env, logger_creator)
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/agents/trainer.py", line 548, in __init__
+[2m[36m(pid=2984557)[0m     super().__init__(config, logger_creator)
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/tune/trainable.py", line 98, in __init__
+[2m[36m(pid=2984557)[0m     self.setup(copy.deepcopy(self.config))
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/agents/trainer.py", line 709, in setup
+[2m[36m(pid=2984557)[0m     self._init(self.config, self.env_creator)
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/agents/trainer_template.py", line 150, in _init
+[2m[36m(pid=2984557)[0m     self.workers = self._make_workers(
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/agents/trainer.py", line 791, in _make_workers
+[2m[36m(pid=2984557)[0m     return WorkerSet(
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/evaluation/worker_set.py", line 92, in __init__
+[2m[36m(pid=2984557)[0m     self._local_worker = self._make_worker(
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/evaluation/worker_set.py", line 367, in _make_worker
+[2m[36m(pid=2984557)[0m     worker = cls(
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/evaluation/rollout_worker.py", line 536, in __init__
+[2m[36m(pid=2984557)[0m     self.policy_map, self.preprocessors = self._build_policy_map(
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/evaluation/rollout_worker.py", line 1196, in _build_policy_map
+[2m[36m(pid=2984557)[0m     policy_map[name] = cls(obs_space, act_space, merged_conf)
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/policy/policy_template.py", line 279, in __init__
+[2m[36m(pid=2984557)[0m     self._initialize_loss_from_dummy_batch(
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/policy/policy.py", line 622, in _initialize_loss_from_dummy_batch
+[2m[36m(pid=2984557)[0m     self.compute_actions_from_input_dict(
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/policy/torch_policy.py", line 261, in compute_actions_from_input_dict
+[2m[36m(pid=2984557)[0m     return self._compute_action_helper(input_dict, state_batches,
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/utils/threading.py", line 21, in wrapper
+[2m[36m(pid=2984557)[0m     return func(self, *a, **k)
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/policy/torch_policy.py", line 325, in _compute_action_helper
+[2m[36m(pid=2984557)[0m     dist_inputs, state_out = self.model(input_dict, state_batches,
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/models/modelv2.py", line 234, in __call__
+[2m[36m(pid=2984557)[0m     res = self.forward(restored, state or [], seq_lens)
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/models/torch/fcnet.py", line 124, in forward
+[2m[36m(pid=2984557)[0m     self._features = self._hidden_layers(self._last_flat_in)
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+[2m[36m(pid=2984557)[0m     result = self.forward(*input, **kwargs)
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/nn/modules/container.py", line 119, in forward
+[2m[36m(pid=2984557)[0m     input = module(input)
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+[2m[36m(pid=2984557)[0m     result = self.forward(*input, **kwargs)
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/models/torch/misc.py", line 160, in forward
+[2m[36m(pid=2984557)[0m     return self._model(x)
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+[2m[36m(pid=2984557)[0m     result = self.forward(*input, **kwargs)
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/nn/modules/container.py", line 119, in forward
+[2m[36m(pid=2984557)[0m     input = module(input)
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+[2m[36m(pid=2984557)[0m     result = self.forward(*input, **kwargs)
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/nn/modules/linear.py", line 94, in forward
+[2m[36m(pid=2984557)[0m     return F.linear(input, self.weight, self.bias)
+[2m[36m(pid=2984557)[0m   File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/nn/functional.py", line 1753, in linear
+[2m[36m(pid=2984557)[0m     return torch._C._nn.linear(input, weight, bias)
+[2m[36m(pid=2984557)[0m RuntimeError: CUDA error: no kernel image is available for execution on the device
+2026-04-20 22:20:37,121	ERROR trial_runner.py:748 -- Trial PPO_Soccer_a29e7_00000: Error processing event.
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/tune/trial_runner.py", line 718, in _process_trial
+    results = self.trial_executor.fetch_result(trial)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/tune/ray_trial_executor.py", line 688, in fetch_result
+    result = ray.get(trial_future[0], timeout=DEFAULT_GET_TIMEOUT)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/client_mode_hook.py", line 62, in wrapper
+    return func(*args, **kwargs)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/worker.py", line 1496, in get
+    raise value
+ray.exceptions.RayActorError: The actor died because of an error raised in its creation task, [36mray::PPO.__init__()[39m (pid=2984557, ip=172.27.149.243)
+  File "python/ray/_raylet.pyx", line 501, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 451, in ray._raylet.execute_task.function_executor
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/function_manager.py", line 563, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/agents/trainer_template.py", line 123, in __init__
+    Trainer.__init__(self, config, env, logger_creator)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/agents/trainer.py", line 548, in __init__
+    super().__init__(config, logger_creator)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/tune/trainable.py", line 98, in __init__
+    self.setup(copy.deepcopy(self.config))
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/agents/trainer.py", line 709, in setup
+    self._init(self.config, self.env_creator)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/agents/trainer_template.py", line 150, in _init
+    self.workers = self._make_workers(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/agents/trainer.py", line 791, in _make_workers
+    return WorkerSet(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/evaluation/worker_set.py", line 92, in __init__
+    self._local_worker = self._make_worker(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/evaluation/worker_set.py", line 367, in _make_worker
+    worker = cls(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/evaluation/rollout_worker.py", line 536, in __init__
+    self.policy_map, self.preprocessors = self._build_policy_map(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/evaluation/rollout_worker.py", line 1196, in _build_policy_map
+    policy_map[name] = cls(obs_space, act_space, merged_conf)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/policy/policy_template.py", line 279, in __init__
+    self._initialize_loss_from_dummy_batch(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/policy/policy.py", line 622, in _initialize_loss_from_dummy_batch
+    self.compute_actions_from_input_dict(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/policy/torch_policy.py", line 261, in compute_actions_from_input_dict
+    return self._compute_action_helper(input_dict, state_batches,
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/utils/threading.py", line 21, in wrapper
+    return func(self, *a, **k)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/policy/torch_policy.py", line 325, in _compute_action_helper
+    dist_inputs, state_out = self.model(input_dict, state_batches,
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/models/modelv2.py", line 234, in __call__
+    res = self.forward(restored, state or [], seq_lens)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/models/torch/fcnet.py", line 124, in forward
+    self._features = self._hidden_layers(self._last_flat_in)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/rllib/models/torch/misc.py", line 160, in forward
+    return self._model(x)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/nn/modules/linear.py", line 94, in forward
+    return F.linear(input, self.weight, self.bias)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/torch/nn/functional.py", line 1753, in linear
+    return torch._C._nn.linear(input, weight, bias)
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+== Status ==
+Memory usage on this node: 13.2/503.2 GiB
+Using FIFO scheduling algorithm.
+Resources requested: 0/64 CPUs, 0/1 GPUs, 0.0/338.18 GiB heap, 0.0/148.92 GiB objects (0.0/1.0 accelerator_type:A100)
+Result logdir: /storage/ice1/3/0/jpise3/soccer-twos-starter/ray_results/PPO_selfplay_rec
+Number of trials: 1/1 (1 PENDING)
++------------------------+----------+-------+
+| Trial name             | status   | loc   |
+|------------------------+----------+-------|
+| PPO_Soccer_a29e7_00000 | PENDING  |       |
++------------------------+----------+-------+
+
+
+[2m[36m(pid=2984548)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984543)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984548)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984548)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984543)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984543)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984556)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984534)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984558)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984547)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984550)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984535)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984556)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984556)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984534)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984534)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984558)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984558)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984547)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984547)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984550)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984550)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984535)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984535)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984556)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984556)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984556)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984548)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984543)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984534)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984547)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984535)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984548)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984548)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984543)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984543)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984534)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984534)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984547)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984547)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984535)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984535)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984556)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984556)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984556)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984548)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984543)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984534)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984547)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984535)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984548)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984548)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984543)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984543)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984534)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984534)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984547)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984547)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984535)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984535)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984558)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984550)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984550)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984550)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984558)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984558)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984550)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984558)[0m [INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[2m[36m(pid=2984550)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984550)[0m [INFO] Connected new brain: SoccerTwos?team=0
+[2m[36m(pid=2984558)[0m [INFO] Connected new brain: SoccerTwos?team=1
+[2m[36m(pid=2984558)[0m [INFO] Connected new brain: SoccerTwos?team=0
+Result for PPO_Soccer_a29e7_00000:
+  {}
+  
+== Status ==
+Memory usage on this node: 15.2/503.2 GiB
+Using FIFO scheduling algorithm.
+Resources requested: 0/64 CPUs, 0/1 GPUs, 0.0/338.18 GiB heap, 0.0/148.92 GiB objects (0.0/1.0 accelerator_type:A100)
+Result logdir: /storage/ice1/3/0/jpise3/soccer-twos-starter/ray_results/PPO_selfplay_rec
+Number of trials: 1/1 (1 ERROR)
++------------------------+----------+-------+
+| Trial name             | status   | loc   |
+|------------------------+----------+-------|
+| PPO_Soccer_a29e7_00000 | ERROR    |       |
++------------------------+----------+-------+
+Number of errored trials: 1
++------------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------+
+| Trial name             |   # failures | error file                                                                                                                       |
+|------------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------|
+| PPO_Soccer_a29e7_00000 |            1 | /storage/ice1/3/0/jpise3/soccer-twos-starter/ray_results/PPO_selfplay_rec/PPO_Soccer_a29e7_00000_0_2026-04-20_22-20-16/error.txt |
++------------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------+
+
+== Status ==
+Memory usage on this node: 15.2/503.2 GiB
+Using FIFO scheduling algorithm.
+Resources requested: 0/64 CPUs, 0/1 GPUs, 0.0/338.18 GiB heap, 0.0/148.92 GiB objects (0.0/1.0 accelerator_type:A100)
+Result logdir: /storage/ice1/3/0/jpise3/soccer-twos-starter/ray_results/PPO_selfplay_rec
+Number of trials: 1/1 (1 ERROR)
++------------------------+----------+-------+
+| Trial name             | status   | loc   |
+|------------------------+----------+-------|
+| PPO_Soccer_a29e7_00000 | ERROR    |       |
++------------------------+----------+-------+
+Number of errored trials: 1
++------------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------+
+| Trial name             |   # failures | error file                                                                                                                       |
+|------------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------|
+| PPO_Soccer_a29e7_00000 |            1 | /storage/ice1/3/0/jpise3/soccer-twos-starter/ray_results/PPO_selfplay_rec/PPO_Soccer_a29e7_00000_0_2026-04-20_22-20-16/error.txt |
++------------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------+
+
+Traceback (most recent call last):
+  File "train_ray_selfplay.py", line 48, in <module>
+    analysis = tune.run(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/tune/tune.py", line 543, in run
+    raise TuneError("Trials did not complete", incomplete_trials)
+ray.tune.error.TuneError: ('Trials did not complete', [PPO_Soccer_a29e7_00000])
+[2m[33m(raylet)[0m /home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/autoscaler/_private/cli_logger.py:57: FutureWarning: Not all Ray CLI dependencies were found. In Ray 1.4+, the Ray CLI, autoscaler, and dashboard will only be usable via `pip install 'ray[default]'`. Please update your install command.
+[2m[33m(raylet)[0m   warnings.warn(
+---------------------------------------
+Begin Slurm Epilog: Apr-20-2026 22:20:39
+Job ID:        5025784
+User ID:       jpise3
+Account:       coc
+Job name:      soccertwos_selfplay
+Resources:     cpu=16,gres/gpu:a100=1,mem=48G,node=1
+Rsrc Used:     cput=00:33:36,vmem=0,walltime=00:02:06,mem=7624260K,energy_used=0
+Partition:     coc-gpu
+QOS:           coc-ice
+Nodes:         atl1-1-03-007-35-0
+---------------------------------------
