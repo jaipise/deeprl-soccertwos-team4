@@ -1,4 +1,20 @@
-# Soccer-Twos Starter Kit
+# Soccer-Twos Starter Kit — TEAM4_AGENT Submission
+
+**Team:** TEAM4_AGENT
+**Authors:** Jai Pise — jpise3@gatech.edu
+**Authors:** Naman Tellakula — ntellakula3@gatech.edu
+
+## Submitted Agents
+
+| Folder | Rubric role |
+|---|---|
+| `TEAM4_AGENT_BASELINE` | Agent1 — PPO self-play baseline (unmodified reward). Comparison line for the other two agents. |
+| `TEAM4_AGENT_REWARD`   | Agent2 — PPO self-play + `ShapedRewardWrapper` (ball-progress reward + step penalty). Covers the reward/observation modification rubric item (40 pts). |
+| `TEAM4_AGENT_SELFPLAY` | Agent3 — PPO with rolling 4-snapshot opponent archive (novel-concept +5 pts) and primary policy-performance submission (50 pts). |
+
+Each folder contains `agent.py` (a `TeamAgent(AgentInterface)` PPO loader), `__init__.py`, its own `README.md`, and a `checkpoint/` directory populated after training.
+
+---
 
 Example training/testing scripts for the Soccer-Twos environment. This starter code is modified from the example code provided in https://github.com/bryanoliveira/soccer-twos-starter.
 
