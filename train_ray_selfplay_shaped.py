@@ -9,7 +9,7 @@ NUM_ENVS_PER_WORKER = 3
 
 
 def policy_mapping_fn(agent_id, *args, **kwargs):
-    if agent_id == 0:
+    if int(agent_id) in (0, 1):
         return "default"
     return np.random.choice(
         ["default", "opponent_1", "opponent_2", "opponent_3"],
@@ -20,7 +20,8 @@ def policy_mapping_fn(agent_id, *args, **kwargs):
 
 class SelfPlayUpdateCallback(DefaultCallbacks):
     def on_train_result(self, **info):
-        if info["result"]["episode_reward_mean"] > 0.5:
+        episode_reward_mean = info["result"].get("episode_reward_mean")
+        if episode_reward_mean is not None and episode_reward_mean > 0.5:
             print("---- Updating opponents!!! ----")
             trainer = info["trainer"]
             trainer.set_weights(
