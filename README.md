@@ -8,9 +8,10 @@
 
 | Folder | Rubric role |
 |---|---|
-| `TEAM4_AGENT_BASELINE` | Agent1 — PPO self-play baseline (unmodified reward). Comparison line for the other two agents. |
-| `TEAM4_AGENT_REWARD`   | Agent2 — PPO self-play + `ShapedRewardWrapper` (ball-progress reward + step penalty). Covers the reward/observation modification rubric item (40 pts). |
-| `TEAM4_AGENT_SELFPLAY` | Agent3 — PPO with rolling 4-snapshot opponent archive (novel-concept +5 pts) and primary policy-performance submission (50 pts). |
+| `TEAM4_AGENT_BASELINE` | Agent1 — shared-policy PPO baseline with no reward shaping and no archived opponents. Comparison line for the other two agents. |
+| `TEAM4_AGENT_REWARD`   | Agent2 — PPO self-play + `ShapedRewardWrapper` for progress, spacing, blocking, and role positioning. Covers the reward/observation modification rubric item (40 pts). |
+| `TEAM4_AGENT_CURRICULUM` | Agent3 — PPO with staged initial-state curriculum, shaped reward, role-specialized striker/goalie policies, and a rolling opponent archive. Covers the novel-learning rubric item (+5 pts) and is the primary policy-performance candidate. |
+| `TEAM4_AGENT_SELFPLAY` | Optional ablation — role-specialized PPO with a rolling opponent archive but no curriculum. Useful for comparing curriculum vs. non-curriculum training. |
 
 Each folder contains `agent.py` (a `TeamAgent(AgentInterface)` PPO loader), `__init__.py`, its own `README.md`, and a `checkpoint/` directory populated after training.
 
@@ -88,6 +89,3 @@ To examine the baseline agent, you must extract the `ceia_baseline_agent` folder
 `python -m soccer_twos.watch -m1 example_player_agent -m2 ceia_baseline_agent`
 
 , to examine the random agent vs. the baseline agent.
-
-
-
