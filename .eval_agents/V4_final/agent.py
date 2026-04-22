@@ -1,8 +1,11 @@
-"""Pure-torch inference agent for TEAM4_AGENT_REWARD (no Ray at inference time).
+"""Pure-torch inference agent for the curriculum-trained striker/goalie PPO team.
 
-Shared single policy: both teammates act with the same trained `default` policy,
-matching how the trial was trained (policy_mapping_fn maps agent 0 and 1 to
-"default").
+No Ray, no RLlib at inference time — needed because the Gradescope autograder
+spawns ~10 parallel eval processes in a Docker with tiny /dev/shm, which breaks
+Ray's redis handshake.
+
+Weights are extracted from the RLlib checkpoint offline via extract_weights.py
+and loaded here as plain nn.Linear state_dicts.
 """
 import os
 
@@ -15,12 +18,16 @@ from soccer_twos import AgentInterface
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OBS_DIM = 336
-ACTION_NVEC = (3, 3, 3)
+ACTION_NVEC = (3, 3, 3)  # MultiDiscrete branches
 _LOGIT_SPLITS = np.cumsum(ACTION_NVEC)[:-1]
 
 
 class _PPOPolicy(nn.Module):
-    """Mirrors RLlib FullyConnectedNetwork(fcnet_hiddens=[256,256], activation=relu)."""
+    """Mirrors RLlib FullyConnectedNetwork(fcnet_hiddens=[256,256], activation=relu).
+
+    RLlib param names use nested SlimFC wrappers; this module uses the same names
+    (fc1/fc2/logits) and a key remap is applied in load_rllib_weights below.
+    """
 
     def __init__(self):
         super().__init__()
@@ -55,17 +62,23 @@ def _load_rllib_weights(model, path):
 
 
 class TeamAgent(AgentInterface):
+    """Agent3 -- curriculum-trained striker/goalie PPO team (pure-torch inference)."""
+
     def __init__(self, env):
-        self.name = "TEAM4_AGENT_REWARD"
-        self.policy = _PPOPolicy()
-        _load_rllib_weights(self.policy, os.path.join(HERE, "default.pth"))
+        self.name = "TEAM4_AGENT_CURRICULUM"
+        self.striker = _PPOPolicy()
+        self.goalie = _PPOPolicy()
+        _load_rllib_weights(self.striker, os.path.join(HERE, "striker.pth"))
+        _load_rllib_weights(self.goalie, os.path.join(HERE, "goalie.pth"))
 
     def act(self, observation):
+        order = sorted(observation)
         actions = {}
         with torch.no_grad():
             for pid, obs in observation.items():
+                model = self.striker if pid == order[0] else self.goalie
                 x = torch.from_numpy(np.asarray(obs, dtype=np.float32)).unsqueeze(0)
-                logits = self.policy(x).squeeze(0).numpy()
+                logits = model(x).squeeze(0).numpy()
                 parts = np.split(logits, _LOGIT_SPLITS)
                 actions[pid] = np.array([int(np.argmax(p)) for p in parts], dtype=np.int64)
         return actions

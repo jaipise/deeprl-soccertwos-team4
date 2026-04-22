@@ -1,19 +1,19 @@
-        # TEAM4_AGENT_CURRICULUM
+        # TEAM4_AGENT_SELFPLAY_REC
 
-        **Agent name:** TEAM4_AGENT_CURRICULUM
+        **Agent name:** TEAM4_AGENT_SELFPLAY_REC
 
         **Authors**
         - Jai Pise  jpise3@gatech.edu
 - Naman Tellakula  ntellakula3@gatech.edu
 
         ## Rubric mapping
-        - Agent3 -- novel concept of learning (+5 pts).
+        - Alt Agent1 -- recurrent self-play baseline.
 
         ## Description
-        PPO with curriculum over initial-state distributions (close-range finish -> midfield attack -> defensive recovery -> full-field), role-specialized striker/goalie policies, rolling self-play archive, and ShapedRewardWrapper.
+        PPO self-play
 
-        Source trial: `ray_results/PPO_curriculum_multiagent/PPO_Soccer_6efa0_00000_0_2026-04-21_17-24-09`
-        Checkpoint packaged: `ray_results/PPO_curriculum_multiagent/PPO_Soccer_6efa0_00000_0_2026-04-21_17-24-09/checkpoint_000646/checkpoint-646`
+        Source trial: `ray_results/PPO_selfplay_rec/PPO_Soccer_32674_00000_0_2026-04-21_19-24-09`
+        Checkpoint packaged: `ray_results/PPO_selfplay_rec/PPO_Soccer_32674_00000_0_2026-04-21_19-24-09/checkpoint_000485/checkpoint-485`
 
         Hyperparameters: `fcnet_hiddens=[256, 256]`, `fcnet_activation=relu`,
         `vf_share_layers=True`, `rollout_fragment_length=5000`,

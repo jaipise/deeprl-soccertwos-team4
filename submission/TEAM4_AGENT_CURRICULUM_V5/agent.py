@@ -1,4 +1,4 @@
-"""Pure-torch inference agent for TEAM4_AGENT_REWARD (no Ray at inference time).
+"""Pure-torch inference agent for TEAM4_AGENT_CURRICULUM_V5 (no Ray at inference time).
 
 Shared single policy: both teammates act with the same trained `default` policy,
 matching how the trial was trained (policy_mapping_fn maps agent 0 and 1 to
@@ -56,7 +56,7 @@ def _load_rllib_weights(model, path):
 
 class TeamAgent(AgentInterface):
     def __init__(self, env):
-        self.name = "TEAM4_AGENT_REWARD"
+        self.name = "TEAM4_AGENT_CURRICULUM_V5"
         self.policy = _PPOPolicy()
         _load_rllib_weights(self.policy, os.path.join(HERE, "default.pth"))
 

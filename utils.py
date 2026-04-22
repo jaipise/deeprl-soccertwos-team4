@@ -72,6 +72,7 @@ DEFAULT_SHAPING_PARAMS = {
     "touch_bonus": 0.0,
     "touch_radius": 0.9,
     "touch_velocity_threshold": 0.35,
+    "role_mode": "fixed",
 }
 
 SHAPING_VARIANTS = {
@@ -81,6 +82,13 @@ SHAPING_VARIANTS = {
     "V3_proximity_up": {"proximity_coef": 0.008},
     "V4_aggressive_combo": {
         "striker_support_offset": 1.0,
+        "touch_bonus": 0.05,
+        "proximity_coef": 0.008,
+        "goalie_target_coef": 0.0015,
+        "goalie_block_coef": 0.001,
+    },
+    "V5_dynamic_aggressive": {
+        "role_mode": "dynamic",
         "touch_bonus": 0.05,
         "proximity_coef": 0.008,
         "goalie_target_coef": 0.0015,
@@ -168,7 +176,42 @@ class ShapedRewardWrapper(gym.Wrapper):
                 elif spacing < p["spacing_close_threshold"]:
                     rew[aid] -= p["spacing_close_penalty"]
 
-            if agent_id in (1, 3):
+            if p.get("role_mode") == "dynamic":
+                if teammate_pos is None:
+                    teammate_ball_dist = float("inf")
+                else:
+                    teammate_ball_dist = _distance(teammate_pos, ball_pos)
+                is_attacker = ball_dist <= teammate_ball_dist
+                own_goal_x = -FIELD_X if sign > 0 else FIELD_X
+                ball_in_own_half = sign * ball_pos[0] < 0
+
+                if is_attacker:
+                    rew[aid] += p["striker_support_coef"] * max(
+                        0.0, 1.0 - ball_dist / 4.0
+                    )
+                elif ball_in_own_half:
+                    target = (
+                        -GOALIE_X if sign > 0 else GOALIE_X,
+                        _clamp(ball_pos[1], -3.5, 3.5),
+                    )
+                    rew[aid] += p["goalie_target_coef"] * max(
+                        0.0, 1.0 - _distance(player_pos, target) / 8.0
+                    )
+                    between_ball_and_goal = (
+                        own_goal_x <= player_pos[0] <= ball_pos[0]
+                        if sign > 0
+                        else ball_pos[0] <= player_pos[0] <= own_goal_x
+                    )
+                    if between_ball_and_goal:
+                        rew[aid] += p["goalie_block_coef"] * max(
+                            0.0, 1.0 - abs(player_pos[1] - ball_pos[1]) / 5.0
+                        )
+                else:
+                    support_target = (ball_pos[0] - (2.0 * sign), ball_pos[1])
+                    rew[aid] += p["striker_support_coef"] * max(
+                        0.0, 1.0 - _distance(player_pos, support_target) / 8.0
+                    )
+            elif agent_id in (1, 3):
                 own_goal_x = -FIELD_X if sign > 0 else FIELD_X
                 target = (
                     -GOALIE_X if sign > 0 else GOALIE_X,

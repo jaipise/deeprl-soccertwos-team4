@@ -1,8 +1,13 @@
-"""Pure-torch inference agent for TEAM4_AGENT_REWARD (no Ray at inference time).
+"""Pure-torch inference agent for the shaped-reward self-play PPO team.
 
-Shared single policy: both teammates act with the same trained `default` policy,
-matching how the trial was trained (policy_mapping_fn maps agent 0 and 1 to
-"default").
+No Ray, no RLlib at inference time — needed because the Gradescope autograder
+spawns ~10 parallel eval processes in a Docker with tiny /dev/shm, which breaks
+Ray's redis handshake.
+
+Weights are extracted from the RLlib checkpoint offline via extract_weights.py
+and loaded here as plain nn.Linear state_dicts. Both teammates use the same
+shared "default" policy that was trained against a rolling self-play opponent
+archive with the ShapedRewardWrapper.
 """
 import os
 
@@ -15,7 +20,7 @@ from soccer_twos import AgentInterface
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OBS_DIM = 336
-ACTION_NVEC = (3, 3, 3)
+ACTION_NVEC = (3, 3, 3)  # MultiDiscrete branches
 _LOGIT_SPLITS = np.cumsum(ACTION_NVEC)[:-1]
 
 
@@ -55,6 +60,8 @@ def _load_rllib_weights(model, path):
 
 
 class TeamAgent(AgentInterface):
+    """Agent2 -- shaped-reward PPO self-play team (pure-torch inference)."""
+
     def __init__(self, env):
         self.name = "TEAM4_AGENT_REWARD"
         self.policy = _PPOPolicy()

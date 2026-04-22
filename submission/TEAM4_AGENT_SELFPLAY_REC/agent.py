@@ -1,8 +1,8 @@
-"""Pure-torch inference agent for TEAM4_AGENT_REWARD (no Ray at inference time).
+"""Pure-torch inference agent for TEAM4_AGENT_SELFPLAY_REC (no Ray at inference time).
 
-Shared single policy: both teammates act with the same trained `default` policy,
-matching how the trial was trained (policy_mapping_fn maps agent 0 and 1 to
-"default").
+Role-specialized policies: the lower-id teammate acts with the `striker` policy,
+the higher-id teammate with the `goalie` policy, matching how the trial was
+trained.
 """
 import os
 
@@ -56,16 +56,20 @@ def _load_rllib_weights(model, path):
 
 class TeamAgent(AgentInterface):
     def __init__(self, env):
-        self.name = "TEAM4_AGENT_REWARD"
-        self.policy = _PPOPolicy()
-        _load_rllib_weights(self.policy, os.path.join(HERE, "default.pth"))
+        self.name = "TEAM4_AGENT_SELFPLAY_REC"
+        self.striker = _PPOPolicy()
+        self.goalie = _PPOPolicy()
+        _load_rllib_weights(self.striker, os.path.join(HERE, "striker.pth"))
+        _load_rllib_weights(self.goalie, os.path.join(HERE, "goalie.pth"))
 
     def act(self, observation):
+        order = sorted(observation)
         actions = {}
         with torch.no_grad():
             for pid, obs in observation.items():
+                model = self.striker if pid == order[0] else self.goalie
                 x = torch.from_numpy(np.asarray(obs, dtype=np.float32)).unsqueeze(0)
-                logits = self.policy(x).squeeze(0).numpy()
+                logits = model(x).squeeze(0).numpy()
                 parts = np.split(logits, _LOGIT_SPLITS)
                 actions[pid] = np.array([int(np.argmax(p)) for p in parts], dtype=np.int64)
         return actions

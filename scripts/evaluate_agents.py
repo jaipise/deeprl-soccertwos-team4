@@ -78,6 +78,18 @@ def parse_args():
         help="Pure-torch curriculum agent template used for packaged checkpoints.",
     )
     parser.add_argument(
+        "--agent-a-policy-ids",
+        nargs="+",
+        default=("striker", "goalie"),
+        help="Policy IDs to extract when --agent-a-checkpoint is used.",
+    )
+    parser.add_argument(
+        "--agent-b-policy-ids",
+        nargs="+",
+        default=("striker", "goalie"),
+        help="Policy IDs to extract when --agent-b-checkpoint is used.",
+    )
+    parser.add_argument(
         "--eval-dir",
         default=str(DEFAULT_EVAL_DIR),
         help="Directory for temporary packaged checkpoint agents.",
@@ -155,14 +167,14 @@ def copy_checkpoint_template(template_dir, out_dir):
         (out_dir / "__init__.py").write_text("from .agent import TeamAgent\n")
 
 
-def package_checkpoint(checkpoint, name, template_dir, eval_dir):
+def package_checkpoint(checkpoint, name, template_dir, eval_dir, policy_ids):
     checkpoint_path = resolve_checkpoint_path(checkpoint)
     safe_name = re.sub(r"[^A-Za-z0-9_]+", "_", name).strip("_") or "checkpoint_agent"
     out_dir = Path(eval_dir) / safe_name
     if out_dir.exists():
         shutil.rmtree(out_dir)
     copy_checkpoint_template(template_dir, out_dir)
-    extract_policy_weights(checkpoint_path, out_dir)
+    extract_policy_weights(checkpoint_path, out_dir, policy_ids=policy_ids)
     print(f"[package] {name}: {checkpoint_path} -> {out_dir}")
     return str(out_dir)
 
@@ -348,6 +360,7 @@ def main():
             args.agent_a_name,
             args.checkpoint_template,
             args.eval_dir,
+            args.agent_a_policy_ids,
         )
     if args.agent_b_checkpoint:
         agent_b_ref = package_checkpoint(
@@ -355,6 +368,7 @@ def main():
             args.agent_b_name,
             args.checkpoint_template,
             args.eval_dir,
+            args.agent_b_policy_ids,
         )
     if not agent_a_ref:
         raise ValueError("Provide --agent-a or --agent-a-checkpoint")

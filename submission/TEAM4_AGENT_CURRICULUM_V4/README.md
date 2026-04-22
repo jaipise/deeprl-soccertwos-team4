@@ -1,19 +1,19 @@
-        # TEAM4_AGENT_CURRICULUM
+        # TEAM4_AGENT_CURRICULUM_V4
 
-        **Agent name:** TEAM4_AGENT_CURRICULUM
+        **Agent name:** TEAM4_AGENT_CURRICULUM_V4
 
         **Authors**
         - Jai Pise  jpise3@gatech.edu
 - Naman Tellakula  ntellakula3@gatech.edu
 
         ## Rubric mapping
-        - Agent3 -- novel concept of learning (+5 pts).
+        - Alt Agent3 -- V4 aggressive-combo curriculum variant.
 
         ## Description
-        PPO with curriculum over initial-state distributions (close-range finish -> midfield attack -> defensive recovery -> full-field), role-specialized striker/goalie policies, rolling self-play archive, and ShapedRewardWrapper.
+        Curriculum multiagent variant tuned for more aggressive shaping + initial-state combos.
 
-        Source trial: `ray_results/PPO_curriculum_multiagent/PPO_Soccer_6efa0_00000_0_2026-04-21_17-24-09`
-        Checkpoint packaged: `ray_results/PPO_curriculum_multiagent/PPO_Soccer_6efa0_00000_0_2026-04-21_17-24-09/checkpoint_000646/checkpoint-646`
+        Source trial: `ray_results/PPO_curriculum_multiagent_V4_aggressive_combo/PPO_Soccer_4a880_00000_0_2026-04-22_00-32-38`
+        Checkpoint packaged: `ray_results/PPO_curriculum_multiagent_V4_aggressive_combo/PPO_Soccer_4a880_00000_0_2026-04-22_00-32-38/checkpoint_000127/checkpoint-127`
 
         Hyperparameters: `fcnet_hiddens=[256, 256]`, `fcnet_activation=relu`,
         `vf_share_layers=True`, `rollout_fragment_length=5000`,

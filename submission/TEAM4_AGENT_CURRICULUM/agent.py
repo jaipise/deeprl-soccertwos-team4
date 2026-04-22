@@ -1,3 +1,9 @@
+"""Pure-torch inference agent for TEAM4_AGENT_CURRICULUM (no Ray at inference time).
+
+Role-specialized policies: the lower-id teammate acts with the `striker` policy,
+the higher-id teammate with the `goalie` policy, matching how the trial was
+trained.
+"""
 import os
 
 import numpy as np
@@ -9,16 +15,12 @@ from soccer_twos import AgentInterface
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OBS_DIM = 336
-ACTION_NVEC = (3, 3, 3)  # MultiDiscrete branches
+ACTION_NVEC = (3, 3, 3)
 _LOGIT_SPLITS = np.cumsum(ACTION_NVEC)[:-1]
 
 
 class _PPOPolicy(nn.Module):
-    """Mirrors RLlib FullyConnectedNetwork(fcnet_hiddens=[256,256], activation=relu).
-
-    RLlib param names use nested SlimFC wrappers; this module uses the same names
-    (fc1/fc2/logits) and a key remap is applied in load_rllib_weights below.
-    """
+    """Mirrors RLlib FullyConnectedNetwork(fcnet_hiddens=[256,256], activation=relu)."""
 
     def __init__(self):
         super().__init__()
@@ -53,8 +55,6 @@ def _load_rllib_weights(model, path):
 
 
 class TeamAgent(AgentInterface):
-    """Agent3 -- curriculum-trained striker/goalie PPO team (pure-torch inference)."""
-
     def __init__(self, env):
         self.name = "TEAM4_AGENT_CURRICULUM"
         self.striker = _PPOPolicy()
