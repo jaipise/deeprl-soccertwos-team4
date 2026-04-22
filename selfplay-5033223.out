@@ -1,0 +1,53 @@
+---------------------------------------
+Begin Slurm Prolog: Apr-21-2026 18:37:05
+Job ID:    5033223
+User ID:   jpise3
+Account:   coc
+Job name:  soccertwos_selfplay
+Partition: coc-cpu
+QOS:       coc-ice
+---------------------------------------
+/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/autoscaler/_private/cli_logger.py:57: FutureWarning: Not all Ray CLI dependencies were found. In Ray 1.4+, the Ray CLI, autoscaler, and dashboard will only be usable via `pip install 'ray[default]'`. Please update your install command.
+  warnings.warn(
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/mlagents_envs/rpc_communicator.py", line 84, in check_port
+    s.bind(("localhost", port))
+OSError: [Errno 98] Address already in use
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "train_ray_selfplay.py", line 75, in <module>
+    temp_env = create_rllib_env()
+  File "/storage/ice1/3/0/jpise3/soccer-twos-starter/utils.py", line 184, in create_rllib_env
+    env = soccer_twos.make(**make_config)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/soccer_twos/__init__.py", line 89, in make
+    unity_env = UnityEnvironment(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/mlagents_envs/environment.py", line 187, in __init__
+    self._communicator = self._get_communicator(worker_id, base_port, timeout_wait)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/mlagents_envs/environment.py", line 252, in _get_communicator
+    return RpcCommunicator(worker_id, base_port, timeout_wait)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/mlagents_envs/rpc_communicator.py", line 51, in __init__
+    self.create_server()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/mlagents_envs/rpc_communicator.py", line 57, in create_server
+    self.check_port(self.port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/mlagents_envs/rpc_communicator.py", line 86, in check_port
+    raise UnityWorkerInUseException(self.worker_id)
+mlagents_envs.exception.UnityWorkerInUseException: Couldn't start socket communication because worker number 225 is still in use. You may need to manually close a previously opened environment or use a different worker number.
+Error in atexit._run_exitfuncs:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/mlagents_envs/environment.py", line 424, in _close
+    self._communicator.close()
+AttributeError: 'UnityEnvironment' object has no attribute '_communicator'
+---------------------------------------
+Begin Slurm Epilog: Apr-21-2026 18:38:48
+Job ID:        5033223
+User ID:       jpise3
+Account:       coc
+Job name:      soccertwos_selfplay
+Resources:     cpu=16,mem=64G,node=1
+Rsrc Used:     cput=00:27:28,vmem=0,walltime=00:01:43,mem=1936468K,energy_used=0
+Partition:     coc-cpu
+QOS:           coc-ice
+Nodes:         atl1-1-01-005-1-2
+---------------------------------------

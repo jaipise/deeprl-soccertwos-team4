@@ -1,0 +1,313 @@
+---------------------------------------
+Begin Slurm Prolog: Apr-21-2026 17:23:01
+Job ID:    5032929
+User ID:   jpise3
+Account:   coc
+Job name:  soccertwos_curriculum
+Partition: coc-cpu
+QOS:       coc-ice
+---------------------------------------
+/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/autoscaler/_private/cli_logger.py:57: FutureWarning: Not all Ray CLI dependencies were found. In Ray 1.4+, the Ray CLI, autoscaler, and dashboard will only be usable via `pip install 'ray[default]'`. Please update your install command.
+  warnings.warn(
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1776806587.907735  155191 fork_posix.cc:75] Other threads are currently calling into gRPC, skipping fork() handlers
+2026-04-21 17:23:10,641	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-27-2.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+2026-04-21 17:23:13,483	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-27-2.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+2026-04-21 17:23:16,314	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-27-2.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+[INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+INFO:mlagents_envs.environment:Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
+[INFO] Connected new brain: SoccerTwos?team=1
+INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=1
+[INFO] Connected new brain: SoccerTwos?team=0
+INFO:mlagents_envs.environment:Connected new brain: SoccerTwos?team=0
+2026-04-21 17:23:18,401	WARNING sample.py:401 -- DeprecationWarning: wrapping <function policy_mapping_fn at 0x1554db943c10> with tune.function() is no longer needed
+2026-04-21 17:23:19,176	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-27-2.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+2026-04-21 17:23:22,039	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-27-2.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+2026-04-21 17:23:24,986	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-27-2.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+2026-04-21 17:23:27,869	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-27-2.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+2026-04-21 17:23:30,857	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-27-2.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+2026-04-21 17:23:34,088	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-27-2.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+2026-04-21 17:23:37,281	WARNING worker.py:1114 -- The agent on node atl1-1-03-007-27-2.pace.gatech.edu failed with the following error:
+Traceback (most recent call last):
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 326, in <module>
+    loop.run_until_complete(agent.run())
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 138, in run
+    modules = self._load_modules()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/agent.py", line 92, in _load_modules
+    c = cls(self)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/new_dashboard/modules/reporter/reporter_agent.py", line 148, in __init__
+    self._metrics_agent = MetricsAgent(dashboard_agent.metrics_export_port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/metrics_agent.py", line 75, in __init__
+    prometheus_exporter.new_stats_exporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 333, in new_stats_exporter
+    exporter = PrometheusStatsExporter(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 266, in __init__
+    self.serve_http()
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/ray/_private/prometheus_exporter.py", line 320, in serve_http
+    start_http_server(
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 231, in start_wsgi_server
+    TmpServer.address_family, addr = _get_best_family(addr, port)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/site-packages/prometheus_client/exposition.py", line 169, in _get_best_family
+    infos = socket.getaddrinfo(address, port, type=socket.SOCK_STREAM, flags=socket.AI_PASSIVE)
+  File "/home/hice1/jpise3/scratch/conda/envs/soccertwos/lib/python3.8/socket.py", line 930, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+[2026-04-21T17:23:39.042] error: *** JOB 5032929 ON atl1-1-03-007-27-2 CANCELLED AT 2026-04-21T17:23:39 DUE to SIGNAL Terminated ***
+---------------------------------------
+Begin Slurm Epilog: Apr-21-2026 17:23:41
+Job ID:        5032929
+User ID:       jpise3
+Account:       coc
+Job name:      soccertwos_curriculum
+Resources:     cpu=16,mem=64G,node=1
+Rsrc Used:     cput=00:10:24,vmem=0,walltime=00:00:39,mem=4066488K,energy_used=0
+Partition:     coc-cpu
+QOS:           coc-ice
+Nodes:         atl1-1-03-007-27-2
+---------------------------------------
