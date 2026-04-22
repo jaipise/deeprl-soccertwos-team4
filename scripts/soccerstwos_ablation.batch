@@ -11,7 +11,7 @@
 # Usage:
 #   sbatch --export=ALL,VARIANT=V1_support_front --job-name=abl_V1 scripts/soccerstwos_ablation.batch
 #
-# Valid VARIANT values: V0_baseline V1_support_front V2_touch_bonus V3_proximity_up V4_aggressive_combo
+# Valid VARIANT values: V0_baseline V1_support_front V2_touch_bonus V3_proximity_up V4_aggressive_combo V5_spacing_focus
 
 set -euo pipefail
 
@@ -20,12 +20,18 @@ set -euo pipefail
 source ~/scratch/miniconda3/etc/profile.d/conda.sh
 conda activate ~/scratch/conda/envs/soccertwos
 
-cd ~/scratch/soccer-twos-starter
+cd ~/scratch/deeprl-soccertwos-team4
 mkdir -p logs ray_results
 
-export RAY_USAGE_STATS_ENABLED=0
 export RAY_DISABLE_DASHBOARD=1
+export RAY_PROMETHEUS_HOST=127.0.0.1
+export RAY_BACKEND_LOG_LEVEL=error
+export RAY_LOG_TO_STDERR=1
 export OMP_NUM_THREADS=1
+
+# Fix Unity port collisions
+export SOCCERTWOS_WORKER_ID_OFFSET=$((100 + SLURM_JOB_ID % 200))
+echo "SOCCERTWOS_WORKER_ID_OFFSET=${SOCCERTWOS_WORKER_ID_OFFSET}"
 
 echo "---- Launching ablation variant: ${VARIANT} ----"
 python train_ray_curriculum_multiagent.py --variant "${VARIANT}"
