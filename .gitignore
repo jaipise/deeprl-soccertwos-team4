@@ -2,6 +2,12 @@ envs/
 ray_results/
 ceia_baseline_agent/
 data/
+.DS_Store
+*.out
+*.pth
+*.zip
+checkpoint/
+checkpoint_*/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

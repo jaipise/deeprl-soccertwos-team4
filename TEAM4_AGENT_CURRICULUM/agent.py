@@ -18,6 +18,19 @@ OPPONENT_POLICIES = {
 }
 
 
+def _checkpoint_path(path):
+    if not os.path.isdir(path):
+        return path
+    checkpoint_files = [
+        os.path.join(path, filename)
+        for filename in os.listdir(path)
+        if filename.startswith("checkpoint-") and not filename.endswith(".tune_metadata")
+    ]
+    if not checkpoint_files:
+        return path
+    return sorted(checkpoint_files)[-1]
+
+
 class TeamAgent(AgentInterface):
     """Agent3 - curriculum-trained striker/goalie PPO team."""
 
@@ -59,7 +72,7 @@ class TeamAgent(AgentInterface):
             },
         })
         if os.path.exists(CHECKPOINT):
-            self.trainer.restore(CHECKPOINT)
+            self.trainer.restore(_checkpoint_path(CHECKPOINT))
         else:
             print(f"Checkpoint not found at {CHECKPOINT}; using untrained policy.")
 

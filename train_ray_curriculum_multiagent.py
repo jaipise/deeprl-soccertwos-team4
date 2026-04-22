@@ -1,3 +1,4 @@
+import argparse
 import os
 
 import numpy as np
@@ -6,7 +7,7 @@ from ray import tune
 from ray.rllib.agents.callbacks import DefaultCallbacks
 import yaml
 
-from utils import create_rllib_env
+from utils import SHAPING_VARIANTS, create_rllib_env
 
 
 NUM_ENVS_PER_WORKER = 2
@@ -128,7 +129,29 @@ class CurriculumSelfPlayCallback(DefaultCallbacks):
             )
 
 
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--variant",
+        default=os.environ.get("SHAPING_VARIANT", "V0_baseline"),
+        choices=sorted(SHAPING_VARIANTS),
+        help="Reward shaping variant to train. Also settable via $SHAPING_VARIANT.",
+    )
+    parser.add_argument(
+        "--timesteps",
+        type=int,
+        default=int(os.environ.get("TIMESTEPS_TOTAL", 15000000)),
+    )
+    parser.add_argument(
+        "--time-budget-s",
+        type=int,
+        default=int(os.environ.get("TIME_BUDGET_S", 28800)),
+    )
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
+    args = parse_args()
     ray_init_for_ice()
 
     tasks = load_curriculum()
@@ -139,9 +162,10 @@ if __name__ == "__main__":
     temp_env.close()
 
     worker_count = min(8, max(1, slurm_cpus() // 2))
+    print(f"---- Training variant: {args.variant} ----")
     analysis = tune.run(
         "PPO",
-        name="PPO_curriculum_multiagent",
+        name=f"PPO_curriculum_multiagent_{args.variant}",
         config={
             "num_gpus": 0,
             "num_workers": worker_count,
@@ -169,6 +193,7 @@ if __name__ == "__main__":
                 "curriculum_tasks": tasks,
                 "curriculum_task_index": 0,
                 "shaped_reward": True,
+                "shaping_variant": args.variant,
             },
             "model": {
                 "vf_share_layers": True,
@@ -178,7 +203,7 @@ if __name__ == "__main__":
             "rollout_fragment_length": 5000,
             "batch_mode": "complete_episodes",
         },
-        stop={"timesteps_total": 15000000, "time_total_s": 28800},
+        stop={"timesteps_total": args.timesteps, "time_total_s": args.time_budget_s},
         checkpoint_freq=25,
         checkpoint_at_end=True,
         local_dir="./ray_results",

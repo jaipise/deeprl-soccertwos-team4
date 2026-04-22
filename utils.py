@@ -55,12 +55,64 @@ class RLLibWrapper(gym.core.Wrapper, MultiAgentEnv):
             self.env.set_curriculum_task(task_index)
 
 
+DEFAULT_SHAPING_PARAMS = {
+    "time_penalty": 0.001,
+    "progress_coef": 0.010,
+    "proximity_coef": 0.002,
+    "proximity_radius": 8.0,
+    "spacing_good_min": 3.0,
+    "spacing_good_max": 10.0,
+    "spacing_good_bonus": 0.0015,
+    "spacing_close_threshold": 2.0,
+    "spacing_close_penalty": 0.0010,
+    "goalie_target_coef": 0.003,
+    "goalie_block_coef": 0.002,
+    "striker_support_offset": -2.0,
+    "striker_support_coef": 0.002,
+    "touch_bonus": 0.0,
+    "touch_radius": 0.9,
+    "touch_velocity_threshold": 0.35,
+}
+
+SHAPING_VARIANTS = {
+    "V0_baseline": {},
+    "V1_support_front": {"striker_support_offset": 1.0},
+    "V2_touch_bonus": {"touch_bonus": 0.05},
+    "V3_proximity_up": {"proximity_coef": 0.008},
+    "V4_aggressive_combo": {
+        "striker_support_offset": 1.0,
+        "touch_bonus": 0.05,
+        "proximity_coef": 0.008,
+        "goalie_target_coef": 0.0015,
+        "goalie_block_coef": 0.001,
+    },
+}
+
+
+def get_shaping_params(variant_name):
+    if variant_name not in SHAPING_VARIANTS:
+        raise ValueError(
+            f"Unknown shaping variant '{variant_name}'. "
+            f"Options: {sorted(SHAPING_VARIANTS)}"
+        )
+    params = dict(DEFAULT_SHAPING_PARAMS)
+    params.update(SHAPING_VARIANTS[variant_name])
+    return params
+
+
 class ShapedRewardWrapper(gym.Wrapper):
     """Team-aware shaping for progress, pressure, spacing, and defensive blocking.
     Team 1 (agents 0,1) attacks +x; team 2 (agents 2,3) attacks -x."""
 
+    def __init__(self, env, params=None):
+        super().__init__(env)
+        self.params = dict(DEFAULT_SHAPING_PARAMS)
+        if params:
+            self.params.update(params)
+
     def reset(self, **kw):
         self._prev_bx = 0.0
+        self._prev_ball_pos = None
         return self.env.reset(**kw)
 
     def set_curriculum_task(self, task_index):
@@ -69,6 +121,7 @@ class ShapedRewardWrapper(gym.Wrapper):
 
     def step(self, action):
         obs, rew, done, info = self.env.step(action)
+        p = self.params
         bx_now = self._prev_bx
         ball_pos = None
         for aid in rew:
@@ -77,30 +130,43 @@ class ShapedRewardWrapper(gym.Wrapper):
                 bx_now = ball_pos[0]
                 break
 
+        ball_speed = 0.0
+        if ball_pos is not None and self._prev_ball_pos is not None:
+            ball_speed = _distance(ball_pos, self._prev_ball_pos)
+
         for aid in rew:
             agent_id = int(aid)
             sign = _team_sign(aid)
             player_pos = _position(info.get(aid, {}), "player_info")
 
-            rew[aid] -= 0.001
+            rew[aid] -= p["time_penalty"]
             if ball_pos is not None:
-                rew[aid] += 0.010 * sign * (ball_pos[0] - self._prev_bx)
+                rew[aid] += p["progress_coef"] * sign * (ball_pos[0] - self._prev_bx)
 
             if player_pos is None or ball_pos is None:
                 continue
 
             ball_dist = _distance(player_pos, ball_pos)
-            rew[aid] += 0.002 * max(0.0, 1.0 - ball_dist / 8.0)
+            rew[aid] += p["proximity_coef"] * max(
+                0.0, 1.0 - ball_dist / p["proximity_radius"]
+            )
+
+            if (
+                p["touch_bonus"] > 0.0
+                and ball_dist <= p["touch_radius"]
+                and ball_speed >= p["touch_velocity_threshold"]
+            ):
+                rew[aid] += p["touch_bonus"]
 
             teammate = _teammate_id(aid)
             teammate_info = info.get(teammate, info.get(str(teammate), {}))
             teammate_pos = _position(teammate_info, "player_info")
             if teammate_pos is not None:
                 spacing = _distance(player_pos, teammate_pos)
-                if 3.0 <= spacing <= 10.0:
-                    rew[aid] += 0.0015
-                elif spacing < 2.0:
-                    rew[aid] -= 0.0010
+                if p["spacing_good_min"] <= spacing <= p["spacing_good_max"]:
+                    rew[aid] += p["spacing_good_bonus"]
+                elif spacing < p["spacing_close_threshold"]:
+                    rew[aid] -= p["spacing_close_penalty"]
 
             if agent_id in (1, 3):
                 own_goal_x = -FIELD_X if sign > 0 else FIELD_X
@@ -108,23 +174,29 @@ class ShapedRewardWrapper(gym.Wrapper):
                     -GOALIE_X if sign > 0 else GOALIE_X,
                     _clamp(ball_pos[1], -3.5, 3.5),
                 )
-                rew[aid] += 0.003 * max(0.0, 1.0 - _distance(player_pos, target) / 8.0)
+                rew[aid] += p["goalie_target_coef"] * max(
+                    0.0, 1.0 - _distance(player_pos, target) / 8.0
+                )
                 between_ball_and_goal = (
                     own_goal_x <= player_pos[0] <= ball_pos[0]
                     if sign > 0
                     else ball_pos[0] <= player_pos[0] <= own_goal_x
                 )
                 if between_ball_and_goal:
-                    rew[aid] += 0.002 * max(
+                    rew[aid] += p["goalie_block_coef"] * max(
                         0.0, 1.0 - abs(player_pos[1] - ball_pos[1]) / 5.0
                     )
             else:
-                support_target = (ball_pos[0] - (2.0 * sign), ball_pos[1])
-                rew[aid] += 0.002 * max(
+                support_target = (
+                    ball_pos[0] + (p["striker_support_offset"] * sign),
+                    ball_pos[1],
+                )
+                rew[aid] += p["striker_support_coef"] * max(
                     0.0, 1.0 - _distance(player_pos, support_target) / 8.0
                 )
 
         self._prev_bx = bx_now
+        self._prev_ball_pos = ball_pos
         return obs, rew, done, info
 
 
@@ -177,6 +249,8 @@ def create_rllib_env(env_config: dict = {}):
         "curriculum_tasks",
         "num_envs_per_worker",
         "shaped_reward",
+        "shaping_variant",
+        "shaping_params",
     }
     make_config = {
         key: value for key, value in env_config.items() if key not in internal_keys
@@ -189,7 +263,12 @@ def create_rllib_env(env_config: dict = {}):
             env_config.get("curriculum_task_index", 0),
         )
     if env_config.get("shaped_reward"):
-        env = ShapedRewardWrapper(env)
+        variant_name = env_config.get("shaping_variant", "V0_baseline")
+        params = get_shaping_params(variant_name)
+        overrides = env_config.get("shaping_params")
+        if overrides:
+            params.update(overrides)
+        env = ShapedRewardWrapper(env, params=params)
     # env = TransitionRecorderWrapper(env)
     if "multiagent" in env_config and not env_config["multiagent"]:
         # is multiagent by default, is only disabled if explicitly set to False
