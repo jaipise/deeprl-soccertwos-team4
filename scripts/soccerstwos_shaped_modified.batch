@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH --job-name=sp_mod
+#SBATCH --output=logs/sp_mod-%j.out
+#SBATCH --error=logs/sp_mod-%j.err
+#SBATCH --time=8:00:00
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --partition=coc-cpu
+#SBATCH --qos=coc-ice
+
+# Activate conda
+source ~/scratch/miniconda3/etc/profile.d/conda.sh
+conda activate ~/scratch/conda/envs/soccertwos
+
+# Go to project
+cd ~/scratch/deeprl-soccertwos-team4
+
+# Run training
+python train_ray_selfplay_modified.py

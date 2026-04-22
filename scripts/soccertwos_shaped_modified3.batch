@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH --job-name=role_shp
+#SBATCH --output=logs/role_shp-%j.out
+#SBATCH --error=logs/role_shp-%j.err
+#SBATCH --time=8:00:00
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --partition=coc-cpu
+#SBATCH --qos=coc-ice
+
+source ~/scratch/miniconda3/etc/profile.d/conda.sh
+conda activate ~/scratch/conda/envs/soccertwos
+
+cd ~/scratch/deeprl-soccertwos-team4
+
+python train_ray_selfplay_modified3.py
