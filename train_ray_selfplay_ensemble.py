@@ -93,10 +93,11 @@ if __name__ == "__main__":
     tune.registry.register_env("Soccer", create_rllib_env)
 
     temp_env = create_rllib_env(
-        {
-            "shaped_reward": True,
-            "num_envs_per_worker": NUM_ENVS_PER_WORKER,
-        }
+    {
+        "shaped_reward": True,
+        "num_envs_per_worker": 1,
+        "worker_id": int(os.environ.get("SOCCERTWOS_WORKER_ID_OFFSET", "0")) + 500,
+    }
     )
     obs_space = temp_env.observation_space
     act_space = temp_env.action_space
