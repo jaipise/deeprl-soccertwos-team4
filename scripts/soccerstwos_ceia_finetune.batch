@@ -1,0 +1,42 @@
+#!/bin/bash
+# Submit from repo root on PACE:
+#   sbatch scripts/soccerstwos_ceia_finetune.batch
+#
+# Useful overrides:
+#   sbatch --export=ALL,INIT_CHECKPOINT=ray_results/PPO_selfplay_shaped/.../checkpoint_000700/checkpoint-700 scripts/soccerstwos_ceia_finetune.batch
+#   sbatch --export=ALL,CEIA_PROB=0.90,TIME_BUDGET_S=28800 scripts/soccerstwos_ceia_finetune.batch
+
+#SBATCH --job-name=ceia_finetune
+#SBATCH -N1 --ntasks-per-node=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH -t09:00:00
+#SBATCH --output=logs/ceia-finetune-%j.out
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --mail-user=jpise3@gatech.edu
+
+source ~/scratch/miniconda3/etc/profile.d/conda.sh
+conda activate ~/scratch/conda/envs/soccertwos
+
+cd "$SLURM_SUBMIT_DIR"
+mkdir -p logs ray_results
+
+export RAY_DISABLE_DASHBOARD=1
+export CEIA_PROB="${CEIA_PROB:-0.85}"
+export TIME_BUDGET_S="${TIME_BUDGET_S:-28800}"
+export TIMESTEPS="${TIMESTEPS:-15000000}"
+export INIT_CHECKPOINT="${INIT_CHECKPOINT:-ray_results/PPO_selfplay_shaped/PPO_Soccer_d5022_00000_0_2026-04-21_18-24-16/checkpoint_000870/checkpoint-870}"
+export CEIA_WEIGHTS="${CEIA_WEIGHTS:-ceia_baseline_agent/default.pth}"
+export NUM_WORKERS="${NUM_WORKERS:-8}"
+export NUM_ENVS_PER_WORKER="${NUM_ENVS_PER_WORKER:-1}"
+export SOCCERTWOS_ENV_CREATE_RETRIES="${SOCCERTWOS_ENV_CREATE_RETRIES:-8}"
+export SOCCERTWOS_WORKER_ID_RETRY_STRIDE="${SOCCERTWOS_WORKER_ID_RETRY_STRIDE:-64}"
+
+python train_ray_ceia_finetune.py \
+  --init-checkpoint "$INIT_CHECKPOINT" \
+  --ceia-weights "$CEIA_WEIGHTS" \
+  --ceia-prob "$CEIA_PROB" \
+  --timesteps "$TIMESTEPS" \
+  --time-budget-s "$TIME_BUDGET_S" \
+  --num-workers "$NUM_WORKERS" \
+  --num-envs-per-worker "$NUM_ENVS_PER_WORKER"

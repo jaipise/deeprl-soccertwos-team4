@@ -1,4 +1,5 @@
 import os
+import time
 from random import uniform as randfloat
 
 import gym
@@ -7,14 +8,22 @@ import soccer_twos
 
 
 _WORKER_ID_BLOCK_SIZE = 32
-_WORKER_ID_OFFSET = int(
-    os.environ.get(
-        "SOCCERTWOS_WORKER_ID_OFFSET",
-        (int(os.environ.get("SLURM_JOB_ID", os.getpid())) % 16)
-        * _WORKER_ID_BLOCK_SIZE
-        + 1,
-    )
+_PORT_BLOCK_SIZE = 128
+_PORT_BLOCK_COUNT = 400
+_BASE_PORT_START = 10000
+
+
+def _default_soccertwos_base_port():
+    job_seed = int(os.environ.get("SLURM_JOB_ID", os.getpid()))
+    return _BASE_PORT_START + (job_seed % _PORT_BLOCK_COUNT) * _PORT_BLOCK_SIZE
+
+
+_SOCCERTWOS_BASE_PORT = int(
+    os.environ.get("SOCCERTWOS_BASE_PORT", _default_soccertwos_base_port())
 )
+_WORKER_ID_OFFSET = int(os.environ.get("SOCCERTWOS_WORKER_ID_OFFSET", 1))
+_WORKER_ID_RETRY_STRIDE = int(os.environ.get("SOCCERTWOS_WORKER_ID_RETRY_STRIDE", 64))
+_ENV_CREATE_RETRIES = int(os.environ.get("SOCCERTWOS_ENV_CREATE_RETRIES", 6))
 FIELD_X = 14.0
 GOALIE_X = 10.5
 
@@ -57,6 +66,8 @@ class RLLibWrapper(gym.core.Wrapper, MultiAgentEnv):
 
 DEFAULT_SHAPING_PARAMS = {
     "time_penalty": 0.001,
+    "score_bonus": 0.0,
+    "concede_penalty": 0.0,
     "progress_coef": 0.010,
     "proximity_coef": 0.002,
     "proximity_radius": 8.0,
@@ -146,6 +157,12 @@ class ShapedRewardWrapper(gym.Wrapper):
             agent_id = int(aid)
             sign = _team_sign(aid)
             player_pos = _position(info.get(aid, {}), "player_info")
+            base_reward = rew[aid]
+
+            if base_reward >= 0.99:
+                rew[aid] += p["score_bonus"]
+            elif base_reward <= -0.99:
+                rew[aid] -= p["concede_penalty"]
 
             rew[aid] -= p["time_penalty"]
             if ball_pos is not None:
@@ -298,7 +315,29 @@ def create_rllib_env(env_config: dict = {}):
     make_config = {
         key: value for key, value in env_config.items() if key not in internal_keys
     }
-    env = soccer_twos.make(**make_config)
+    make_config.setdefault("base_port", _SOCCERTWOS_BASE_PORT)
+    base_worker_id = int(make_config.get("worker_id", 0))
+    last_error = None
+    for attempt in range(_ENV_CREATE_RETRIES):
+        try:
+            env = soccer_twos.make(**make_config)
+            break
+        except Exception as exc:
+            message = str(exc)
+            is_port_collision = (
+                "Address already in use" in message
+                or "UnityWorkerInUseException" in exc.__class__.__name__
+                or "still in use" in message
+            )
+            if not is_port_collision or attempt == _ENV_CREATE_RETRIES - 1:
+                raise
+            last_error = exc
+            make_config["worker_id"] = base_worker_id + (
+                (attempt + 1) * _WORKER_ID_RETRY_STRIDE
+            )
+            time.sleep(0.25 + 0.10 * attempt)
+    else:
+        raise last_error
     if env_config.get("curriculum_tasks"):
         env = CurriculumResetWrapper(
             env,
