@@ -25,32 +25,25 @@ if __name__ == "__main__":
         "PPO",
         name="PPO_selfplay_1",
         config={
-            # system settings
             "num_gpus": 1,
             "num_workers": 6,
-            # "num_envs_per_worker": NUM_ENVS_PER_WORKER,
             "log_level": "INFO",
             "framework": "torch",
-            #
             "env": "Soccer",
             "input": "/home/bryan/Documents/ceia/course/tournament-starter/data/processed",
             "input_evaluation": [],
             "explore": False,
         },
         stop={
-            "timesteps_total": 15000000,  # 15M
-            # "time_total_s": 14400, # 4h
+            "timesteps_total": 15000000,
         },
         checkpoint_freq=100,
         checkpoint_at_end=True,
         local_dir="./ray_results",
-        # restore="./ray_results/PPO_selfplay_1/PPO_Soccer_ID/checkpoint_00X/checkpoint-X",
     )
 
-    # Gets best trial based on max accuracy across all training iterations.
     best_trial = analysis.get_best_trial("episode_reward_mean", mode="max")
     print(best_trial)
-    # Gets best checkpoint for trial based on accuracy.
     best_checkpoint = analysis.get_best_checkpoint(
         trial=best_trial, metric="episode_reward_mean", mode="max"
     )

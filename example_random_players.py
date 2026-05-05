@@ -19,7 +19,7 @@ while True:
 
     team0_reward += reward[0] + reward[1]
     team1_reward += reward[2] + reward[3]
-    if max(done.values()):  # if any agent is done
+    if max(done.values()):
         print("Total Reward: ", team0_reward, " x ", team1_reward)
         team0_reward = 0
         team1_reward = 0
