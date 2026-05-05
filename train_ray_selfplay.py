@@ -37,9 +37,6 @@ def policy_mapping_fn(agent_id, *args, **kwargs):
 
 class SelfPlayUpdateCallback(DefaultCallbacks):
     def on_train_result(self, **info):
-        """
-        Update multiagent oponent weights when reward is high enough
-        """
         episode_reward_mean = info["result"].get("episode_reward_mean")
         if episode_reward_mean is not None and episode_reward_mean > 0.5:
             print("---- Updating role-specialized opponent archive!!! ----")
@@ -81,14 +78,12 @@ if __name__ == "__main__":
         "PPO",
         name="PPO_selfplay_rec",
         config={
-            # system settings
             "num_gpus": 0,
             "num_workers": 8,
             "num_envs_per_worker": NUM_ENVS_PER_WORKER,
             "log_level": "INFO",
             "framework": "torch",
             "callbacks": SelfPlayUpdateCallback,
-            # RL setup
             "multiagent": {
                 "policies": {
                     "striker": (None, obs_space, act_space, {}),
@@ -113,17 +108,14 @@ if __name__ == "__main__":
             "rollout_fragment_length": 5000,
             "batch_mode": "complete_episodes",
         },
-        stop={"timesteps_total": 15000000, "time_total_s": 28800,},  # 8h
+        stop={"timesteps_total": 15000000, "time_total_s": 28800,},
         checkpoint_freq=100,
         checkpoint_at_end=True,
         local_dir="./ray_results",
-        # restore="./ray_results/PPO_selfplay_twos_2/PPO_Soccer_a8b44_00000_0_2021-09-18_11-13-55/checkpoint_000600/checkpoint-600",
     )
 
-    # Gets best trial based on max accuracy across all training iterations.
     best_trial = analysis.get_best_trial("episode_reward_mean", mode="max")
     print(best_trial)
-    # Gets best checkpoint for trial based on accuracy.
     best_checkpoint = analysis.get_best_checkpoint(
         trial=best_trial, metric="episode_reward_mean", mode="max"
     )

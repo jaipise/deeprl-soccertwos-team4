@@ -47,7 +47,6 @@ if __name__ == "__main__":
         "PPO",
         name="PPO_selfplay_shaped_v2",
         config={
-            # system
             "num_gpus": 0,
             "num_workers": 8,
             "num_envs_per_worker": NUM_ENVS_PER_WORKER,
@@ -55,15 +54,11 @@ if __name__ == "__main__":
             "framework": "torch",
             "log_level": "INFO",
             "callbacks": SelfPlayUpdateCallback,
-
-            # environment
             "env": "Soccer",
             "env_config": {
                 "num_envs_per_worker": NUM_ENVS_PER_WORKER,
                 "shaped_reward": True,
             },
-
-            # multi-agent self-play
             "multiagent": {
                 "policies": {
                     "default": (None, obs_space, act_space, {}),
@@ -74,8 +69,6 @@ if __name__ == "__main__":
                 "policy_mapping_fn": tune.function(policy_mapping_fn),
                 "policies_to_train": ["default"],
             },
-
-            # PPO hyperparameters
             "lr": 5e-5,
             "gamma": 0.99,
             "lambda": 0.95,
@@ -87,8 +80,6 @@ if __name__ == "__main__":
             "train_batch_size": 65536,
             "rollout_fragment_length": 5000,
             "batch_mode": "complete_episodes",
-
-            # model
             "model": {
                 "vf_share_layers": True,
                 "fcnet_hiddens": [256, 256],

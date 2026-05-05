@@ -32,8 +32,6 @@ def _checkpoint_path(path):
 
 
 class TeamAgent(AgentInterface):
-    """Agent3 - curriculum-trained striker/goalie PPO team."""
-
     def __init__(self, env):
         self.name = "TEAM4_AGENT_CURRICULUM"
         if not ray.is_initialized():

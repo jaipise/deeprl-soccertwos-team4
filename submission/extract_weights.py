@@ -1,21 +1,3 @@
-"""Convert an RLlib 1.4 PPO checkpoint into portable per-policy torch .pth files.
-
-Usage:
-    python submission/extract_weights.py <path-to-checkpoint-N> <out-dir> [policy_id ...]
-
-Examples:
-    python submission/extract_weights.py \
-        TEAM4_AGENT_CURRICULUM/checkpoint/checkpoint-225 \
-        submission/TEAM4_AGENT_CURRICULUM
-    # default policy IDs are striker, goalie
-
-    python submission/extract_weights.py \
-        ray_results/PPO_selfplay_shaped/.../checkpoint_000100/checkpoint-100 \
-        submission/TEAM4_AGENT_REWARD default
-
-Writes <pid>.pth into <out-dir>. Does NOT require ray.init() — only needs the
-ray python package importable (for unpickling MeanStdFilter).
-"""
 import os
 import pickle
 import sys
@@ -23,7 +5,7 @@ import sys
 import numpy as np
 import torch
 
-import ray.rllib  # noqa: F401  (needed so pickle can resolve filter classes)
+import ray.rllib  # noqa: F401
 
 
 def main():

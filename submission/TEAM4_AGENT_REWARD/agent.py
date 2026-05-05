@@ -1,9 +1,3 @@
-"""Pure-torch inference agent for TEAM4_AGENT_REWARD (no Ray at inference time).
-
-Shared single policy: both teammates act with the same trained `default` policy,
-matching how the trial was trained (policy_mapping_fn maps agent 0 and 1 to
-"default").
-"""
 import os
 
 import numpy as np
@@ -20,8 +14,6 @@ _LOGIT_SPLITS = np.cumsum(ACTION_NVEC)[:-1]
 
 
 class _PPOPolicy(nn.Module):
-    """Mirrors RLlib FullyConnectedNetwork(fcnet_hiddens=[256,256], activation=relu)."""
-
     def __init__(self):
         super().__init__()
         self.fc1 = nn.Linear(OBS_DIM, 256)
@@ -36,11 +28,11 @@ class _PPOPolicy(nn.Module):
 
 _RLLIB_KEY_MAP = {
     "_hidden_layers.0._model.0.weight": "fc1.weight",
-    "_hidden_layers.0._model.0.bias":   "fc1.bias",
+    "_hidden_layers.0._model.0.bias": "fc1.bias",
     "_hidden_layers.1._model.0.weight": "fc2.weight",
-    "_hidden_layers.1._model.0.bias":   "fc2.bias",
-    "_logits._model.0.weight":          "logits.weight",
-    "_logits._model.0.bias":            "logits.bias",
+    "_hidden_layers.1._model.0.bias": "fc2.bias",
+    "_logits._model.0.weight": "logits.weight",
+    "_logits._model.0.bias": "logits.bias",
 }
 
 

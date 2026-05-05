@@ -1,18 +1,4 @@
 #!/usr/bin/env python
-"""Evaluate Soccer Twos agents by playing headless matches.
-
-Examples:
-    python scripts/evaluate_agents.py \
-        --agent-a TEAM4_AGENT_CURRICULUM \
-        --agent-b ceia_baseline_agent \
-        --episodes 20 --swap-sides
-
-    python scripts/evaluate_agents.py \
-        --agent-a-checkpoint ray_results/PPO_curriculum_multiagent_V4_aggressive_combo \
-        --agent-a-name V4_aggressive_combo \
-        --agent-b ceia_baseline_agent \
-        --episodes 20 --swap-sides --csv eval_results/v4_vs_ceia.csv
-"""
 import argparse
 import csv
 import importlib
@@ -131,7 +117,7 @@ def resolve_checkpoint_path(path):
 
 
 def extract_policy_weights(checkpoint_path, out_dir, policy_ids=("striker", "goalie")):
-    import ray.rllib  # noqa: F401  Required so pickle can resolve RLlib classes.
+    import ray.rllib  # noqa: F401
     import torch
 
     with open(checkpoint_path, "rb") as f:

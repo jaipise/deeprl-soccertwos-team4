@@ -22,7 +22,7 @@ config_fns = {
 
 def policy_mapping_fn(agent_id, *args, **kwargs):
     if agent_id == 0:
-        return "default"  # Choose 01 policy for agent_01
+        return "default"
     else:
         return np.random.choice(
             ["default", "opponent_1", "opponent_2", "opponent_3"],
@@ -48,9 +48,6 @@ class SelfPlayCurriculumCallback(DefaultCallbacks):
             )
 
     def on_train_result(self, **info):
-        """
-        Update multiagent opponent weights and curriculum task when reward is high enough
-        """
         global current
         result = info["result"]
         reward = result["episode_reward_mean"]
@@ -84,14 +81,12 @@ if __name__ == "__main__":
         "PPO",
         name="PPO_selfplay_curriculum",
         config={
-            # system settings
             "num_gpus": 0,
             "num_workers": 8,
             "num_envs_per_worker": NUM_ENVS_PER_WORKER,
             "log_level": "INFO",
             "framework": "torch",
             "callbacks": SelfPlayCurriculumCallback,
-            # RL setup
             "multiagent": {
                 "policies": {
                     "default": (None, obs_space, act_space, {}),
@@ -101,7 +96,6 @@ if __name__ == "__main__":
                 },
                 "policy_mapping_fn": policy_mapping_fn,
             },
-            # PPO settings
             "lr": 5e-5,
             "gamma": 0.99,
             "lambda": 0.95,

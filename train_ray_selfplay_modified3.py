@@ -23,13 +23,11 @@ def _opponent_generation(episode):
 def policy_mapping_fn(agent_id, *args, **kwargs):
     agent_id = int(agent_id)
 
-    # trainable team
     if agent_id == 0:
         return "striker"
     if agent_id == 1:
         return "goalie"
 
-    # opponent team
     episode = args[0] if args else kwargs.get("episode")
     role = "striker" if agent_id == 2 else "goalie"
     generation = _opponent_generation(episode)
@@ -82,22 +80,17 @@ if __name__ == "__main__":
         "PPO",
         name="PPO_selfplay_role_shaped",
         config={
-            # system
             "num_gpus": 0,
             "num_workers": 8,
             "num_envs_per_worker": NUM_ENVS_PER_WORKER,
             "log_level": "INFO",
             "framework": "torch",
             "callbacks": RoleSelfPlayUpdateCallback,
-
-            # env
             "env": "Soccer",
             "env_config": {
                 "num_envs_per_worker": NUM_ENVS_PER_WORKER,
                 "shaped_reward": True,
             },
-
-            # multiagent
             "multiagent": {
                 "policies": {
                     "striker": (None, obs_space, act_space, {}),
@@ -113,7 +106,6 @@ if __name__ == "__main__":
                 "policies_to_train": ["striker", "goalie"],
             },
 
-            # stronger PPO settings
             "lr": 5e-5,
             "gamma": 0.99,
             "lambda": 0.95,

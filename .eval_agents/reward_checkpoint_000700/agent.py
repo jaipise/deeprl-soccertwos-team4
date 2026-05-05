@@ -1,14 +1,3 @@
-"""Pure-torch inference agent for the shaped-reward self-play PPO team.
-
-No Ray, no RLlib at inference time — needed because the Gradescope autograder
-spawns ~10 parallel eval processes in a Docker with tiny /dev/shm, which breaks
-Ray's redis handshake.
-
-Weights are extracted from the RLlib checkpoint offline via extract_weights.py
-and loaded here as plain nn.Linear state_dicts. Both teammates use the same
-shared "default" policy that was trained against a rolling self-play opponent
-archive with the ShapedRewardWrapper.
-"""
 import os
 
 import numpy as np
@@ -20,13 +9,11 @@ from soccer_twos import AgentInterface
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OBS_DIM = 336
-ACTION_NVEC = (3, 3, 3)  # MultiDiscrete branches
+ACTION_NVEC = (3, 3, 3)
 _LOGIT_SPLITS = np.cumsum(ACTION_NVEC)[:-1]
 
 
 class _PPOPolicy(nn.Module):
-    """Mirrors RLlib FullyConnectedNetwork(fcnet_hiddens=[256,256], activation=relu)."""
-
     def __init__(self):
         super().__init__()
         self.fc1 = nn.Linear(OBS_DIM, 256)
@@ -41,11 +28,11 @@ class _PPOPolicy(nn.Module):
 
 _RLLIB_KEY_MAP = {
     "_hidden_layers.0._model.0.weight": "fc1.weight",
-    "_hidden_layers.0._model.0.bias":   "fc1.bias",
+    "_hidden_layers.0._model.0.bias": "fc1.bias",
     "_hidden_layers.1._model.0.weight": "fc2.weight",
-    "_hidden_layers.1._model.0.bias":   "fc2.bias",
-    "_logits._model.0.weight":          "logits.weight",
-    "_logits._model.0.bias":            "logits.bias",
+    "_hidden_layers.1._model.0.bias": "fc2.bias",
+    "_logits._model.0.weight": "logits.weight",
+    "_logits._model.0.bias": "logits.bias",
 }
 
 
@@ -60,8 +47,6 @@ def _load_rllib_weights(model, path):
 
 
 class TeamAgent(AgentInterface):
-    """Agent2 -- shaped-reward PPO self-play team (pure-torch inference)."""
-
     def __init__(self, env):
         self.name = "TEAM4_AGENT_REWARD"
         self.policy = _PPOPolicy()

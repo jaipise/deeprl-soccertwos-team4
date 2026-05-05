@@ -9,8 +9,6 @@ CHECKPOINT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "checkpoin
 
 
 class TeamAgent(AgentInterface):
-    """Agent2 — PPO self-play trained with shaped reward (ball progress + step penalty)."""
-
     def __init__(self, env):
         self.name = "TEAM4_AGENT_REWARD"
         if not ray.is_initialized():

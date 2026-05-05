@@ -7,7 +7,6 @@ from ray.rllib.agents.callbacks import DefaultCallbacks
 from utils import create_rllib_env, sample_pos_vel, sample_player
 
 
-# Keep this conservative for cluster stability.
 NUM_ENVS_PER_WORKER = 1
 NUM_WORKERS = 4
 
@@ -64,8 +63,6 @@ class SuperiorSelfPlayCallback(DefaultCallbacks):
         if reward > self.best_reward:
             self.best_reward = reward
 
-        # Self-play archive update:
-        # update only when reward is meaningfully better than last archive refresh.
         if reward > 0.5 and reward > self.last_archive_update_reward + 0.10:
             print("---- Updating opponents!!! ----")
             trainer.set_weights(
@@ -77,8 +74,6 @@ class SuperiorSelfPlayCallback(DefaultCallbacks):
             )
             self.last_archive_update_reward = reward
 
-        # Curriculum progression:
-        # advance only after the policy is clearly stronger, not too early.
         if reward > 1.2 and self.current < len(self.tasks) - 1:
             self.current += 1
             print(
@@ -107,22 +102,17 @@ if __name__ == "__main__":
         "PPO",
         name="PPO_selfplay_ensemble",
         config={
-            # system
             "num_gpus": 0,
             "num_workers": NUM_WORKERS,
             "num_envs_per_worker": NUM_ENVS_PER_WORKER,
             "framework": "torch",
             "log_level": "INFO",
             "callbacks": SuperiorSelfPlayCallback,
-
-            # environment
             "env": "Soccer",
             "env_config": {
                 "shaped_reward": True,
                 "num_envs_per_worker": NUM_ENVS_PER_WORKER,
             },
-
-            # self-play
             "multiagent": {
                 "policies": {
                     "default": (None, obs_space, act_space, {}),
@@ -134,7 +124,6 @@ if __name__ == "__main__":
                 "policies_to_train": ["default"],
             },
 
-            # PPO: slightly more conservative than your collapsing run
             "lr": 3e-5,
             "gamma": 0.99,
             "lambda": 0.95,
@@ -147,7 +136,6 @@ if __name__ == "__main__":
             "rollout_fragment_length": 2000,
             "batch_mode": "complete_episodes",
 
-            # model
             "model": {
                 "vf_share_layers": True,
                 "fcnet_hiddens": [256, 256],

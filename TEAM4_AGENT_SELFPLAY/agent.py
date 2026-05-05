@@ -19,8 +19,6 @@ OPPONENT_POLICIES = {
 
 
 class TeamAgent(AgentInterface):
-    """Agent3 — role-specialized PPO with archived striker/goalie opponents."""
-
     def __init__(self, env):
         self.name = "TEAM4_AGENT_SELFPLAY"
         if not ray.is_initialized():

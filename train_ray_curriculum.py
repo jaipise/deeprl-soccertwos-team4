@@ -60,14 +60,12 @@ if __name__ == "__main__":
         "PPO",
         name="PPO_curriculum",
         config={
-            # system settings
             "num_gpus": 1,
             "num_workers": 14,
             "num_envs_per_worker": NUM_ENVS_PER_WORKER,
             "log_level": "INFO",
             "framework": "torch",
             "callbacks": CurriculumUpdateCallback,
-            # RL setup
             "env": "Soccer",
             "env_config": {
                 "num_envs_per_worker": NUM_ENVS_PER_WORKER,
@@ -87,19 +85,16 @@ if __name__ == "__main__":
         },
         stop={
             "timesteps_total": 15000000,
-            "time_total_s": 7200, # 2h
+            "time_total_s": 7200,
             "episode_reward_mean": 1.9,
         },
         checkpoint_freq=5,
         checkpoint_at_end=True,
         local_dir="./ray_results",
-        # restore="./ray_results/PPO_selfplay_twos_2/PPO_Soccer_a8b44_00000_0_2021-09-18_11-13-55/checkpoint_000600/checkpoint-600",
     )
 
-    # Gets best trial based on max accuracy across all training iterations.
     best_trial = analysis.get_best_trial("episode_reward_mean", mode="max")
     print(best_trial)
-    # Gets best checkpoint for trial based on accuracy.
     best_checkpoint = analysis.get_best_checkpoint(
         trial=best_trial, metric="episode_reward_mean", mode="max"
     )

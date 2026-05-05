@@ -46,10 +46,6 @@ def _teammate_id(agent_id):
 
 
 class RLLibWrapper(gym.core.Wrapper, MultiAgentEnv):
-    """
-    A RLLib wrapper so our env can inherit from MultiAgentEnv.
-    """
-
     def set_curriculum_task(self, task_index):
         if hasattr(self.env, "set_curriculum_task"):
             self.env.set_curriculum_task(task_index)
@@ -109,9 +105,6 @@ def get_shaping_params(variant_name):
 
 
 class ShapedRewardWrapper(gym.Wrapper):
-    """Team-aware shaping for progress, pressure, spacing, and defensive blocking.
-    Team 1 (agents 0,1) attacks +x; team 2 (agents 2,3) attacks -x."""
-
     def __init__(self, env, params=None):
         super().__init__(env)
         self.params = dict(DEFAULT_SHAPING_PARAMS)
@@ -244,8 +237,6 @@ class ShapedRewardWrapper(gym.Wrapper):
 
 
 class CurriculumResetWrapper(gym.Wrapper):
-    """Applies staged initial-state randomization at episode reset."""
-
     def __init__(self, env, tasks, task_index=0):
         super().__init__(env)
         self.tasks = tasks
@@ -272,14 +263,6 @@ class CurriculumResetWrapper(gym.Wrapper):
 
 
 def create_rllib_env(env_config: dict = {}):
-    """
-    Creates a RLLib environment and prepares it to be instantiated by Ray workers.
-    Args:
-        env_config: configuration for the environment.
-            You may specify the following keys:
-            - variation: one of soccer_twos.EnvType. Defaults to EnvType.multiagent_player.
-            - opponent_policy: a Callable for your agent to train against. Defaults to a random policy.
-    """
     if hasattr(env_config, "worker_index"):
         env_config["worker_id"] = _WORKER_ID_OFFSET + (
             env_config.worker_index * env_config.get("num_envs_per_worker", 1)
@@ -312,9 +295,7 @@ def create_rllib_env(env_config: dict = {}):
         if overrides:
             params.update(overrides)
         env = ShapedRewardWrapper(env, params=params)
-    # env = TransitionRecorderWrapper(env)
     if "multiagent" in env_config and not env_config["multiagent"]:
-        # is multiagent by default, is only disabled if explicitly set to False
         return env
     return RLLibWrapper(env)
 

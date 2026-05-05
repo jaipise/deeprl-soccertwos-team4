@@ -1,29 +1,3 @@
-"""Build a submission zip from an RLlib trial directory.
-
-Auto-detects:
-  - Latest checkpoint in the trial dir (highest checkpoint_NNNNNN).
-  - Trainable policy names from params.pkl (multiagent.policies_to_train).
-  - Architecture: must be FullyConnectedNetwork(fcnet_hiddens=[256,256], relu).
-    Anything else (LSTM / different hidden sizes) aborts with a clear message.
-
-Template selection by trainable-policy set:
-  {'default'}             -> single shared policy (both teammates share)
-  {'striker', 'goalie'}   -> role-specialized (agent 0 = striker, agent 1 = goalie)
-
-Usage:
-    python submission/build_zip.py \
-        --trial ray_results/PPO_curriculum_multiagent/PPO_Soccer_6efa0_00000_0_2026-04-21_17-24-09 \
-        --name TEAM4_AGENT_CURRICULUM \
-        --rubric "Agent3 -- novel concept of learning (+5 pts)" \
-        --desc "PPO with curriculum of initial-state distributions + role-specialized striker/goalie policies + self-play archive + reward shaping."
-
-Produces:
-    submission/<NAME>/__init__.py
-    submission/<NAME>/agent.py
-    submission/<NAME>/README.md
-    submission/<NAME>/<policy>.pth   (one per trainable policy)
-    submission/<NAME>.zip
-"""
 import argparse
 import glob
 import os
@@ -36,7 +10,7 @@ import textwrap
 import numpy as np
 import torch
 
-import ray.rllib  # noqa: F401  (pickle needs filter classes importable)
+import ray.rllib  # noqa: F401
 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -57,13 +31,7 @@ AUTHORS_BLOCK = (
 )
 
 
-AGENT_SHARED_TEMPLATE = '''"""Pure-torch inference agent for {name} (no Ray at inference time).
-
-Shared single policy: both teammates act with the same trained `default` policy,
-matching how the trial was trained (policy_mapping_fn maps agent 0 and 1 to
-"default").
-"""
-import os
+AGENT_SHARED_TEMPLATE = '''import os
 
 import numpy as np
 import torch
@@ -79,8 +47,6 @@ _LOGIT_SPLITS = np.cumsum(ACTION_NVEC)[:-1]
 
 
 class _PPOPolicy(nn.Module):
-    """Mirrors RLlib FullyConnectedNetwork(fcnet_hiddens=[256,256], activation=relu)."""
-
     def __init__(self):
         super().__init__()
         self.fc1 = nn.Linear(OBS_DIM, 256)
@@ -95,11 +61,11 @@ class _PPOPolicy(nn.Module):
 
 _RLLIB_KEY_MAP = {{
     "_hidden_layers.0._model.0.weight": "fc1.weight",
-    "_hidden_layers.0._model.0.bias":   "fc1.bias",
+    "_hidden_layers.0._model.0.bias": "fc1.bias",
     "_hidden_layers.1._model.0.weight": "fc2.weight",
-    "_hidden_layers.1._model.0.bias":   "fc2.bias",
-    "_logits._model.0.weight":          "logits.weight",
-    "_logits._model.0.bias":            "logits.bias",
+    "_hidden_layers.1._model.0.bias": "fc2.bias",
+    "_logits._model.0.weight": "logits.weight",
+    "_logits._model.0.bias": "logits.bias",
 }}
 
 
@@ -131,13 +97,7 @@ class TeamAgent(AgentInterface):
 '''
 
 
-AGENT_ROLES_TEMPLATE = '''"""Pure-torch inference agent for {name} (no Ray at inference time).
-
-Role-specialized policies: the lower-id teammate acts with the `striker` policy,
-the higher-id teammate with the `goalie` policy, matching how the trial was
-trained.
-"""
-import os
+AGENT_ROLES_TEMPLATE = '''import os
 
 import numpy as np
 import torch
@@ -153,8 +113,6 @@ _LOGIT_SPLITS = np.cumsum(ACTION_NVEC)[:-1]
 
 
 class _PPOPolicy(nn.Module):
-    """Mirrors RLlib FullyConnectedNetwork(fcnet_hiddens=[256,256], activation=relu)."""
-
     def __init__(self):
         super().__init__()
         self.fc1 = nn.Linear(OBS_DIM, 256)
@@ -169,11 +127,11 @@ class _PPOPolicy(nn.Module):
 
 _RLLIB_KEY_MAP = {{
     "_hidden_layers.0._model.0.weight": "fc1.weight",
-    "_hidden_layers.0._model.0.bias":   "fc1.bias",
+    "_hidden_layers.0._model.0.bias": "fc1.bias",
     "_hidden_layers.1._model.0.weight": "fc2.weight",
-    "_hidden_layers.1._model.0.bias":   "fc2.bias",
-    "_logits._model.0.weight":          "logits.weight",
-    "_logits._model.0.bias":            "logits.bias",
+    "_hidden_layers.1._model.0.bias": "fc2.bias",
+    "_logits._model.0.weight": "logits.weight",
+    "_logits._model.0.bias": "logits.bias",
 }}
 
 
@@ -280,7 +238,7 @@ def write_readme(out_dir, name, rubric, desc, trial_dir, ckpt_path,
                  trainable_pids, extra_notes=""):
     rel_trial = os.path.relpath(trial_dir, REPO)
     rel_ckpt = os.path.relpath(ckpt_path, REPO)
-    pth_lines = "\n".join(f"- `{pid}.pth` — state_dict for the `{pid}` policy." for pid in trainable_pids)
+    pth_lines = "\n".join(f"- `{pid}.pth` - state_dict for the `{pid}` policy." for pid in trainable_pids)
     body = textwrap.dedent(f"""\
         # {name}
 
@@ -302,9 +260,9 @@ def write_readme(out_dir, name, rubric, desc, trial_dir, ckpt_path,
         `batch_mode=complete_episodes`.
 
         ## Files in this folder
-        - `agent.py` — `TeamAgent(AgentInterface)` with pure-torch inference (no Ray).
+        - `agent.py` - `TeamAgent(AgentInterface)` with pure-torch inference (no Ray).
         {pth_lines}
-        - `__init__.py` — re-exports `TeamAgent`.
+        - `__init__.py` - re-exports `TeamAgent`.
         {extra_notes}
         """)
     with open(os.path.join(out_dir, "README.md"), "w") as f:
@@ -325,7 +283,6 @@ def zip_dir(submission_root, name):
     zip_path = os.path.join(submission_root, f"{name}.zip")
     if os.path.exists(zip_path):
         os.remove(zip_path)
-    # zip from inside submission_root so paths are "<name>/..." not "submission/<name>/..."
     subprocess.check_call(
         ["zip", "-r", f"{name}.zip", name,
          "-x", "*.DS_Store", "*/__pycache__/*"],
@@ -336,12 +293,12 @@ def zip_dir(submission_root, name):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--trial", required=True, help="path to PPO_Soccer_<id>_... trial dir")
-    ap.add_argument("--name", required=True, help="submission name, e.g. TEAM4_AGENT_CURRICULUM")
-    ap.add_argument("--rubric", default="", help="one-line rubric mapping for README")
-    ap.add_argument("--desc", default="", help="free-form description for README")
-    ap.add_argument("--ckpt", default=None, help="override checkpoint path (else picks latest)")
-    ap.add_argument("--extra-notes", default="", help="appended to README after why-pure-torch")
+    ap.add_argument("--trial", required=True)
+    ap.add_argument("--name", required=True)
+    ap.add_argument("--rubric", default="")
+    ap.add_argument("--desc", default="")
+    ap.add_argument("--ckpt", default=None)
+    ap.add_argument("--extra-notes", default="")
     args = ap.parse_args()
 
     trial_dir = os.path.abspath(args.trial)
@@ -357,7 +314,7 @@ def main():
     if hiddens and list(hiddens) != [256, 256]:
         sys.exit(f"fcnet_hiddens={hiddens} != [256,256]; update build_zip.py to support.")
     if model_cfg.get("use_lstm"):
-        sys.exit("trial uses LSTM; needs a custom agent.py — not handled by build_zip.py.")
+        sys.exit("trial uses LSTM; needs a custom agent.py - not handled by build_zip.py.")
     print(f"[info] trainable policies = {trainable_pids}")
 
     agent_src, use_pids = choose_template(trainable_pids, args.name)

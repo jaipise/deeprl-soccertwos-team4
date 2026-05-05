@@ -9,8 +9,6 @@ CHECKPOINT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "checkpoin
 
 
 class TeamAgent(AgentInterface):
-    """Agent1 — shared-policy PPO baseline with unmodified sparse reward."""
-
     def __init__(self, env):
         self.name = "TEAM4_AGENT_BASELINE"
         if not ray.is_initialized():

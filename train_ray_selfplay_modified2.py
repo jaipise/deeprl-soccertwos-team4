@@ -38,7 +38,6 @@ class CurriculumSelfPlayCallback(DefaultCallbacks):
     def on_train_result(self, trainer, result, **kwargs):
         reward = result["episode_reward_mean"]
 
-        # self-play update
         if reward > 0.5:
             trainer.set_weights({
                 "opponent_3": trainer.get_weights(["opponent_2"])["opponent_2"],
@@ -46,7 +45,6 @@ class CurriculumSelfPlayCallback(DefaultCallbacks):
                 "opponent_1": trainer.get_weights(["default"])["default"],
             })
 
-        # curriculum progression
         if reward > 1.5 and self.current < len(self.curriculum) - 1:
             self.current += 1
             print(f"Advancing curriculum → level {self.current}")
@@ -89,7 +87,6 @@ if __name__ == "__main__":
                 "policies_to_train": ["default"],
             },
 
-            # strong PPO settings
             "lr": 5e-5,
             "gamma": 0.99,
             "lambda": 0.95,
